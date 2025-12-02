@@ -1,7 +1,6 @@
 package gr.hua.dit.Ergasia.controller;
 
 import gr.hua.dit.Ergasia.dto.RegisterRequest;
-import gr.hua.dit.Ergasia.model.User;
 import gr.hua.dit.Ergasia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String registerPage() {
-        return "register"; // loads register.html
+        return "register";
     }
 
     @PostMapping("/register")
