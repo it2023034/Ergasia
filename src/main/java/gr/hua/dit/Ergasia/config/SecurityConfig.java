@@ -34,7 +34,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/api/login", "/register", "/h2-console/**").permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+                .httpBasic(basic -> {});
 
         return http.build();
     }
