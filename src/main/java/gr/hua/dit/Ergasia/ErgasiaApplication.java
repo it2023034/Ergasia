@@ -36,7 +36,7 @@ public class ErgasiaApplication {
             System.out.println("===== TESTING EMPLOYEE SERVICES =====");
 
             // 1️⃣ Βρες έναν employee από τη βάση (αλλάζεις username ανάλογα με τα δεδομένα σου)
-            Employee employee = userRepository.findByUsernameOrEmail("employee1", "employee1@test.com")
+            Employee employee = userRepository.findByUsernameOrEmail("emp_nikolaou", "n.nikolaou@gov.gr")
                     .map(u -> (Employee) u)
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
 

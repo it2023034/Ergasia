@@ -26,7 +26,7 @@ public class Request {
     @JoinColumn(name = "service_id",  nullable = false)
     private DepartmentService departmentService;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> comment;
 
     public Request(String title, DepartmentService departmentService, List<String> comment) {
