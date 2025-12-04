@@ -1,9 +1,9 @@
 package gr.hua.dit.Ergasia.service;
 
-import gr.hua.dit.Ergasia.model.AppointmentSlot;
-import gr.hua.dit.Ergasia.model.Department;
-import gr.hua.dit.Ergasia.repository.AppointmentSlotRepository;
-import gr.hua.dit.Ergasia.repository.DepartmentRepository;
+import gr.hua.dit.adminbt.adminbt.model.AppointmentSlot;
+import gr.hua.dit.adminbt.adminbt.model.Department;
+import gr.hua.dit.adminbt.adminbt.repository.AppointmentSlotRepository;
+import gr.hua.dit.adminbt.adminbt.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;

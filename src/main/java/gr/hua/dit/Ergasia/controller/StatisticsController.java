@@ -1,7 +1,7 @@
 package gr.hua.dit.Ergasia.controller;
 
-import gr.hua.dit.Ergasia.model.StatisticsDTO;
-import gr.hua.dit.Ergasia.service.StatisticsService;
+import gr.hua.dit.adminbt.adminbt.model.StatisticsDTO;
+import gr.hua.dit.adminbt.adminbt.service.StatisticsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

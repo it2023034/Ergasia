@@ -1,6 +1,6 @@
 package gr.hua.dit.Ergasia.repository;
 
-import gr.hua.dit.Ergasia.model.AppointmentSlot;
+import gr.hua.dit.adminbt.adminbt.model.AppointmentSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

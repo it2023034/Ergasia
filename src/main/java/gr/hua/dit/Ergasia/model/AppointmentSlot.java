@@ -1,13 +1,21 @@
 package gr.hua.dit.Ergasia.model;
 
+import jakarta.persistence.*;
 import java.time.LocalTime;
 
+@Entity
 public class AppointmentSlot {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String dayOfWeek;
+    private String dayOfWeek;   // e.g. "MONDAY"
     private LocalTime startTime;
     private LocalTime endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     private Department department;
 
     public AppointmentSlot() {}
@@ -19,6 +27,7 @@ public class AppointmentSlot {
         this.department = department;
     }
 
+    // Getters & setters
     public Long getId() {
         return id;
     }
