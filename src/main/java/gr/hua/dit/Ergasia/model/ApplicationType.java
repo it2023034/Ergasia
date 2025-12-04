@@ -1,10 +1,10 @@
 package gr.hua.dit.Ergasia.model;
 
 public enum ApplicationType {
-    RESIDENCE_CERTIFICATE("Βεβαίωση Μόνιμης Κατοικίας"),
-    SIDEWALK_OCCUPATION("Άδεια Κατάληψης Πεζοδρομίου"),
-    LIGHTING_ISSUE("Αναφορά Προβλήματος Φωτισμού"),
-    OTHER("Άλλο");
+    RESIDENCE_CERTIFICATE("Veveosi Monimis Katoikias"),
+    SIDEWALK_OCCUPATION("Adeia Katalipsis Pezodromiou"),
+    LIGHTING_ISSUE("Anafora Provlimatos Fotismou"),
+    OTHER("Allo");
 
     private final String description;
 

@@ -42,7 +42,7 @@ public class EmployeeServices {
 
     public void assignRequest(Request request, Employee employee) {
         request.setEmployee(employee);
-        request.setStatus(RequestStatus.RECEIVED);
+        request.setStatus(ApplicationStatus.RECEIVED);
         requestRepository.save(request);
         logger.info("Request '{}' assigned to {}", request.getTitle(), employee.getLastName() + " " + employee.getFirstName());
     }
@@ -53,7 +53,7 @@ public class EmployeeServices {
             return;
         }
         request.setEmployee(employee);
-        request.setStatus(RequestStatus.RECEIVED);
+        request.setStatus(ApplicationStatus.RECEIVED);
         requestRepository.save(request);
         logger.info("Request '{}' self-assigned to {}", request.getTitle(), employee.getLastName() + " " + employee.getFirstName());
     }
@@ -64,20 +64,20 @@ public class EmployeeServices {
         logger.info("Comment added to request '{}': {}", request.getTitle(), comment);
     }
 
-    public void changeStatus(Request request, RequestStatus status) {
+    public void changeStatus(Request request, ApplicationStatus status) {
         request.setStatus(status);
         requestRepository.save(request);
         logger.info("Request '{}' status changed to {}", request.getTitle(), status);
     }
 
     public void approveRequest(Request request, String documentation) {
-        request.setStatus(RequestStatus.COMPLETED);
+        request.setStatus(ApplicationStatus.COMPLETED);
         requestRepository.save(request);
         logger.info("Request '{}' approved. Reason: {}", request.getTitle(), documentation);
     }
 
     public void rejectRequest(Request request, String documentation) {
-        request.setStatus(RequestStatus.REJECTED);
+        request.setStatus(ApplicationStatus.REJECTED);
         requestRepository.save(request);
         logger.info("Request '{}' rejected. Reason: {}", request.getTitle(), documentation);
     }

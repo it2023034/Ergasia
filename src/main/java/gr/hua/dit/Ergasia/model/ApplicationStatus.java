@@ -2,7 +2,10 @@ package gr.hua.dit.Ergasia.model;
 
 public enum ApplicationStatus {
     SUBMITTED,
+    RECEIVED,
     IN_PROGRESS,
-    APPROVED,
+    WAITING_USER_DATA,
+    COMPLETED,
     REJECTED
 }
+

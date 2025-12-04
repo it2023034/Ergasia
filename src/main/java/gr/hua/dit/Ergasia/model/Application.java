@@ -1,7 +1,5 @@
 package gr.hua.dit.Ergasia.model;
 
-import gr.hua.dit.Ergasia.model.ApplicationStatus;
-import gr.hua.dit.Ergasia.model.ApplicationType;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

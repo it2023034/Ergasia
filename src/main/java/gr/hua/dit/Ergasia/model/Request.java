@@ -20,7 +20,7 @@ public class Request {
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
-    private RequestStatus status;
+    private ApplicationStatus status;
 
     @ManyToOne
     @JoinColumn(name = "service_id",  nullable = false)
@@ -32,7 +32,7 @@ public class Request {
     public Request(String title, DepartmentService departmentService, List<String> comment) {
         this.title = title;
         this.departmentService = departmentService;
-        this.status = RequestStatus.SUBMITTED;
+        this.status = ApplicationStatus.SUBMITTED;
         this.comment = comment;
     }
 
@@ -54,11 +54,11 @@ public class Request {
         this.employee = employee;
     }
 
-    public RequestStatus getStatus() {
+    public ApplicationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(RequestStatus status) {
+    public void setStatus(ApplicationStatus status) {
         this.status = status;
     }
 
