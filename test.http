@@ -1,0 +1,23 @@
+### 1. Create Department (ID=1)
+POST http://localhost:8080/api/departments?name=ΚΕΠ
+
+### 2. Create Request Type (ID=1)
+POST http://localhost:8080/api/request-types?name=Βεβαίωση%20Κατοικίας
+
+### 3. Assign Request Type → Department
+PUT http://localhost:8080/api/request-types/1/assign-department?departmentId=1
+
+### 4. Get all Request Types
+GET http://localhost:8080/api/request-types
+
+### Create slot for ΚΕΠ (Mon 09:00–14:00)
+POST http://localhost:8080/api/appointments/create?departmentId=1&dayOfWeek=MONDAY&start=09:00&end=14:00
+
+### Create another slot
+POST http://localhost:8080/api/appointments/create?departmentId=1&dayOfWeek=TUESDAY&start=10:00&end=13:00
+
+### Get slots for department 1
+GET http://localhost:8080/api/appointments/1
+
+### Get all statistics
+GET http://localhost:8080/api/statistics
