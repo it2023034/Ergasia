@@ -2,15 +2,10 @@ package gr.hua.dit.Ergasia.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "departments")
-
 public class Department {
 
     public Department() {}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
