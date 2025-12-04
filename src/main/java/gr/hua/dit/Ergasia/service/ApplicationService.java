@@ -2,6 +2,7 @@ package gr.hua.dit.Ergasia.service;
 
 import gr.hua.dit.Ergasia.dto.ApplicationRequest;
 import gr.hua.dit.Ergasia.model.Application;
+import gr.hua.dit.Ergasia.model.ApplicationStatus;
 import gr.hua.dit.Ergasia.model.User;
 import gr.hua.dit.Ergasia.model.ApplicationType;
 import gr.hua.dit.Ergasia.repository.ApplicationRepository;

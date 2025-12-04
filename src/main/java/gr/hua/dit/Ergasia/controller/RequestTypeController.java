@@ -1,7 +1,7 @@
-package gr.hua.dit.adminbt.adminbt.controller;
+package gr.hua.dit.Ergasia.controller;
 
-import gr.hua.dit.adminbt.adminbt.model.RequestType;
-import gr.hua.dit.adminbt.adminbt.service.RequestTypeService;
+import gr.hua.dit.Ergasia.model.RequestType;
+import gr.hua.dit.Ergasia.service.RequestTypeService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

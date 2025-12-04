@@ -1,10 +1,10 @@
-package gr.hua.dit.adminbt.adminbt.service;
+package gr.hua.dit.Ergasia.service;
 
-import gr.hua.dit.adminbt.adminbt.model.Department;
-import gr.hua.dit.adminbt.adminbt.model.StatisticsDTO;
-import gr.hua.dit.adminbt.adminbt.repository.AppointmentSlotRepository;
-import gr.hua.dit.adminbt.adminbt.repository.DepartmentRepository;
-import gr.hua.dit.adminbt.adminbt.repository.RequestTypeRepository;
+import gr.hua.dit.Ergasia.model.Department;
+import gr.hua.dit.Ergasia.model.StatisticsDTO;
+import gr.hua.dit.Ergasia.repository.AppointmentSlotRepository;
+import gr.hua.dit.Ergasia.repository.DepartmentRepository;
+import gr.hua.dit.Ergasia.repository.RequestTypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

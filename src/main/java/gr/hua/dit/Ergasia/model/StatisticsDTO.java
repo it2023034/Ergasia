@@ -1,4 +1,4 @@
-package gr.hua.dit.adminbt.adminbt.model;
+package gr.hua.dit.Ergasia.model;
 
 import java.util.Map;
 
