@@ -21,7 +21,6 @@ public class ErgasiaApplication {
     @Bean
     public CommandLineRunner testEmployeeServices(
             EmployeeServices employeeServices,
-            RequestRepository requestRepository,
             AppointmentRepository appointmentRepository,
             UserRepository userRepository
     ) {
