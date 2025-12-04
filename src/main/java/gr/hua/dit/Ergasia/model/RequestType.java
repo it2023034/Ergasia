@@ -2,19 +2,14 @@ package gr.hua.dit.Ergasia.model;
 
 import jakarta.persistence.*;
 
-@Entity
-public class RequestType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RequestType {
     private Long id;
 
     private String name;
 
     private boolean active = true;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
     private Department department;
 
     // Constructors
