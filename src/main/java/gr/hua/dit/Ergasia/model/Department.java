@@ -1,7 +1,5 @@
 package gr.hua.dit.Ergasia.model;
 
-import jakarta.persistence.*;
-
 public class Department {
 
     public Department() {}
