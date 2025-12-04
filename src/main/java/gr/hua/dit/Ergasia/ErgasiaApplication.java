@@ -1,13 +1,7 @@
 package gr.hua.dit.Ergasia;
 
-import gr.hua.dit.Ergasia.model.Appointment;
-import gr.hua.dit.Ergasia.model.ApplicationStatus;
-import gr.hua.dit.Ergasia.model.Employee;
-import gr.hua.dit.Ergasia.model.Request;
-import gr.hua.dit.Ergasia.model.EmployeeServices;
-import gr.hua.dit.Ergasia.repository.AppointmentRepository;
-import gr.hua.dit.Ergasia.repository.RequestRepository;
-import gr.hua.dit.Ergasia.repository.UserRepository;
+import gr.hua.dit.Ergasia.model.*;
+import gr.hua.dit.Ergasia.repository.*;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,78 +26,54 @@ public class ErgasiaApplication {
             UserRepository userRepository
     ) {
         return args -> {
+            System.out.println("Ksekinaei to test gia tis employee services.");
 
-            System.out.println("===== TESTING EMPLOYEE SERVICES =====");
-
-            // 1️⃣ Βρες έναν employee από τη βάση (αλλάζεις username ανάλογα με τα δεδομένα σου)
+            System.out.println("Anazitisi employee sti vasi...");
             Employee employee = userRepository.findByUsernameOrEmail("emp_nikolaou", "n.nikolaou@gov.gr")
                     .map(u -> (Employee) u)
-                    .orElseThrow(() -> new RuntimeException("Employee not found"));
+                    .orElseThrow(() -> new RuntimeException("Employee den vrethike"));
 
-            System.out.println("Employee: " + employee.getFirstName() + " " + employee.getLastName());
+            System.out.println("Employee vrethike: " + employee.getFirstName() + " " + employee.getLastName());
 
-
-            // 2️⃣ Φέρε όλα τα requests της υπηρεσίας του
-            System.out.println("\n--- showListOfRequests ---");
+            System.out.println("Fere lista aitiseon tis ypiresias tou:");
             List<Request> requests = employeeServices.showListOfRequests(employee);
 
             if (requests.isEmpty()) {
-                System.out.println("No requests found for employee.");
-                return;
-            }
-
-            // Διάλεξε ένα request για τεστ
-            Request request = requests.getFirst();
-
-
-            // 3️⃣ assignRequest
-            System.out.println("\n--- assignRequest ---");
-            employeeServices.assignRequest(request, employee);
-
-
-            // 4️⃣ addComment
-            System.out.println("\n--- addComment ---");
-            employeeServices.addComment(request, "Αυτό είναι ένα τεστ comment");
-
-
-            // 5️⃣ changeStatus
-            System.out.println("\n--- changeStatus ---");
-            employeeServices.changeStatus(request, ApplicationStatus.IN_PROGRESS);
-
-
-            // 6️⃣ approveRequest
-            System.out.println("\n--- approveRequest ---");
-            employeeServices.approveRequest(request, "Όλα τα δικαιολογητικά είναι σωστά.");
-
-
-            // 7️⃣ rejectRequest (δοκιμαστικά – απλά δείχνει τη λειτουργία)
-            System.out.println("\n--- rejectRequest ---");
-            employeeServices.rejectRequest(request, "Απόρριψη για τεστ.");
-
-
-            // 8️⃣ Appointment tests
-            System.out.println("\n--- Appointment Tests ---");
-            Appointment appointment = appointmentRepository.findAll().stream().findFirst().orElse(null);
-
-            if (appointment != null) {
-
-                // confirm
-                System.out.println("\n--- confirmAppointment ---");
-                employeeServices.confirmAppointment(appointment);
-
-                // reschedule
-                System.out.println("\n--- rescheduleAppointment ---");
-                employeeServices.rescheduleAppointment(appointment, LocalDateTime.now().plusDays(2));
-
-                // cancel
-                System.out.println("\n--- cancelAppointment ---");
-                employeeServices.cancelAppointment(appointment);
+                System.out.println("Den vrethikan aitiseis gia ton employee.");
             } else {
-                System.out.println("No appointments found in DB.");
+                Request request = requests.get(0);
+                System.out.println("Proti aitisi gia testing: " + request.getTitle());
+
+                System.out.println("Kanoume assign request...");
+                employeeServices.assignRequest(request, employee);
+                System.out.println("Assign oloklirothike");
+
+                System.out.println("Prosthiki comment...");
+                employeeServices.addComment(request, "Auto einai ena test comment");
+                System.out.println("Comment prostethike");
+
+                System.out.println("Allagi status se IN_PROGRESS...");
+                employeeServices.changeStatus(request, ApplicationStatus.IN_PROGRESS);
+                System.out.println("Status allagmeno");
+
+                System.out.println("Epitagri/Apodixi request...");
+                employeeServices.approveRequest(request, "Ola ta dikaiologitika einai swsta");
+                employeeServices.rejectRequest(request, "Aporripsi gia test");
+                System.out.println("Epitagri kai aporripsi oloklirothikan");
+
+                Appointment appointment = appointmentRepository.findAll().stream().findFirst().orElse(null);
+                if (appointment != null) {
+                    System.out.println("Epitagri, anatheorisi kai akyrwsi appointment...");
+                    employeeServices.confirmAppointment(appointment);
+                    employeeServices.rescheduleAppointment(appointment, LocalDateTime.now().plusDays(2));
+                    employeeServices.cancelAppointment(appointment);
+                    System.out.println("Appointment diakriseis oloklirothikan");
+                } else {
+                    System.out.println("Den vrethikan appointments sti vasi");
+                }
             }
 
-            System.out.println("\n===== END OF TEST =====");
+            System.out.println("Telos test employee services.");
         };
     }
 }
-
