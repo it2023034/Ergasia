@@ -1,7 +1,7 @@
 package gr.hua.dit.Ergasia.controller;
 
-import gr.hua.dit.adminbt.adminbt.model.AppointmentSlot;
-import gr.hua.dit.adminbt.adminbt.service.AppointmentSlotService;
+import gr.hua.dit.Ergasia.model.AppointmentSlot;
+import gr.hua.dit.Ergasia.service.AppointmentSlotService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;

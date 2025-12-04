@@ -1,7 +1,7 @@
 package gr.hua.dit.Ergasia.controller;
 
-import gr.hua.dit.adminbt.adminbt.model.Department;
-import gr.hua.dit.adminbt.adminbt.service.DepartmentService;
+import gr.hua.dit.Ergasia.model.Department;
+import gr.hua.dit.Ergasia.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
