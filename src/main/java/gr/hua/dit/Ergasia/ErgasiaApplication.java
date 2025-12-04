@@ -40,8 +40,12 @@ public class ErgasiaApplication {
             if (requests.isEmpty()) {
                 System.out.println("Den vrethikan aitiseis gia ton employee.");
             } else {
-                Request request = requests.get(0);
+                Request request = requests.getFirst();
                 System.out.println("Proti aitisi gia testing: " + request.getTitle());
+
+                System.out.println("Kanoume self-assign tis aitisis...");
+                employeeServices.selfAssignRequest(request, employee);
+                System.out.println("Self-assign oloklirothike");
 
                 System.out.println("Kanoume assign request...");
                 employeeServices.assignRequest(request, employee);
@@ -55,10 +59,13 @@ public class ErgasiaApplication {
                 employeeServices.changeStatus(request, ApplicationStatus.IN_PROGRESS);
                 System.out.println("Status allagmeno");
 
-                System.out.println("Epitagri/Apodixi request...");
+                System.out.println("Epitagri request...");
                 employeeServices.approveRequest(request, "Ola ta dikaiologitika einai swsta");
+                System.out.println("Request epitagrethike");
+
+                System.out.println("Aporripsi request gia test...");
                 employeeServices.rejectRequest(request, "Aporripsi gia test");
-                System.out.println("Epitagri kai aporripsi oloklirothikan");
+                System.out.println("Request aporripthike");
 
                 Appointment appointment = appointmentRepository.findAll().stream().findFirst().orElse(null);
                 if (appointment != null) {
@@ -66,7 +73,7 @@ public class ErgasiaApplication {
                     employeeServices.confirmAppointment(appointment);
                     employeeServices.rescheduleAppointment(appointment, LocalDateTime.now().plusDays(2));
                     employeeServices.cancelAppointment(appointment);
-                    System.out.println("Appointment diakriseis oloklirothikan");
+                    System.out.println("Diakriseis appointment oloklirothikan");
                 } else {
                     System.out.println("Den vrethikan appointments sti vasi");
                 }
