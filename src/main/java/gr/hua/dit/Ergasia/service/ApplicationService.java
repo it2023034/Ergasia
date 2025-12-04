@@ -30,15 +30,12 @@ public class ApplicationService {
         this.userRepository = userRepository;
     }
 
-    // Προβολή διαθέσιμων υπηρεσιών
     public Map<String, String> getAvailableServices() {
         return Arrays.stream(ApplicationType.values())
                 .collect(Collectors.toMap(Enum::name, ApplicationType::getDescription));
     }
 
-    // Υποβολή αιτήματος
     public Application submitApplication(ApplicationRequest request, MultipartFile file) throws IOException {
-        // Βρίσκουμε ποιος χρήστης είναι συνδεδεμένος
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -50,7 +47,6 @@ public class ApplicationService {
         app.setCreatedAt(LocalDateTime.now());
         app.setCitizen(currentUser);
 
-        // Διαχείριση Αρχείου
         if (file != null && !file.isEmpty()) {
             app.setFileName(file.getOriginalFilename());
             app.setAttachedFile(file.getBytes());
@@ -59,7 +55,6 @@ public class ApplicationService {
         return applicationRepository.save(app);
     }
 
-    // Ιστορικό αιτήσεων του πολίτη
     public List<Application> getMyApplications() {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
