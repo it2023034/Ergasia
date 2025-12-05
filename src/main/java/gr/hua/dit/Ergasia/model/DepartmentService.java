@@ -10,8 +10,10 @@ public class DepartmentService {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "service_name", nullable = false, length = 30)
+    @Column(name = "service_name", nullable = false, length = 30, unique = true)
     private String serviceName;
+
+    private boolean active;
 
     public DepartmentService() {}
 
@@ -29,5 +31,17 @@ public class DepartmentService {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
