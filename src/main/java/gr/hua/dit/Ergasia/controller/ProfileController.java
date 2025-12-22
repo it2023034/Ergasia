@@ -2,6 +2,7 @@ package gr.hua.dit.Ergasia.controller;
 
 import gr.hua.dit.Ergasia.model.User;
 import gr.hua.dit.Ergasia.repository.UserRepository;
+import gr.hua.dit.Ergasia.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,22 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProfileController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public ProfileController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public ProfileController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/profile")
     public String profile(Model model, Authentication authentication) {
 
-        String username = authentication.getName();
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = userService.getUserProfile(authentication.getName());
         model.addAttribute("user", user);
 
         return "profile";
     }
 }
+

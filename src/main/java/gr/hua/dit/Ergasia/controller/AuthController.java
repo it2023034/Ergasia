@@ -18,12 +18,11 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:8080")
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
@@ -40,18 +39,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        User user = userRepository.findByUsernameOrEmail(request.getIdentifier(), request.getIdentifier())
-                .orElse(null);
-
-        if (user != null && passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("id", user.getId());
-            response.put("role", user.getRole());
-            response.put("username", user.getUsername());
-            response.put("message", "Επιτυχής σύνδεση");
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(401).body("Λάθος στοιχεία εισόδου");
-        }
+        return ResponseEntity.ok(userService.login(request));
     }
 }
+

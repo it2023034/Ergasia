@@ -24,12 +24,7 @@ public class AppointmentSlotController {
             @RequestParam String start,
             @RequestParam String end
     ) {
-        return slotService.createSlot(
-                departmentId,
-                dayOfWeek.toUpperCase(),
-                LocalTime.parse(start),
-                LocalTime.parse(end)
-        );
+        return slotService.createSlot(departmentId, dayOfWeek, start, end);
     }
 
     @GetMapping("/{departmentId}")
