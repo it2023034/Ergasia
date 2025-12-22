@@ -1,7 +1,6 @@
 package gr.hua.dit.Ergasia.controller;
 
 import gr.hua.dit.Ergasia.model.User;
-import gr.hua.dit.Ergasia.repository.UserRepository;
 import gr.hua.dit.Ergasia.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

@@ -4,7 +4,6 @@ import gr.hua.dit.Ergasia.model.AppointmentSlot;
 import gr.hua.dit.Ergasia.service.AppointmentSlotService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @RestController

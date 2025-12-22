@@ -3,11 +3,8 @@ package gr.hua.dit.Ergasia.controller;
 import gr.hua.dit.Ergasia.dto.LoginRequest;
 import gr.hua.dit.Ergasia.dto.RegisterRequest;
 import gr.hua.dit.Ergasia.model.User;
-import gr.hua.dit.Ergasia.repository.UserRepository;
 import gr.hua.dit.Ergasia.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
