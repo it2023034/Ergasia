@@ -1,5 +1,6 @@
-package gr.hua.dit.Ergasia.model;
+package gr.hua.dit.Ergasia.service;
 
+import gr.hua.dit.Ergasia.model.*;
 import gr.hua.dit.Ergasia.repository.AppointmentRepository;
 import gr.hua.dit.Ergasia.repository.RequestRepository;
 

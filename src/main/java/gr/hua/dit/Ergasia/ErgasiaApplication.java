@@ -3,6 +3,7 @@ package gr.hua.dit.Ergasia;
 import gr.hua.dit.Ergasia.model.*;
 import gr.hua.dit.Ergasia.repository.*;
 
+import gr.hua.dit.Ergasia.service.EmployeeServices;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
