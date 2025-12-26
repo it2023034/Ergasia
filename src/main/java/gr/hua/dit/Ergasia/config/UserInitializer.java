@@ -1,8 +1,8 @@
 package gr.hua.dit.Ergasia.config;
 
-import gr.hua.dit.Ergasia.model.Role;
-import gr.hua.dit.Ergasia.model.User;
-import gr.hua.dit.Ergasia.repository.UserRepository;
+import gr.hua.dit.Ergasia.core.model.Role;
+import gr.hua.dit.Ergasia.core.model.User;
+import gr.hua.dit.Ergasia.core.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

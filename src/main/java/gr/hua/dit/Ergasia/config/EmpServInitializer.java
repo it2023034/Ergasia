@@ -1,10 +1,10 @@
 package gr.hua.dit.Ergasia.config;
 
-import gr.hua.dit.Ergasia.model.Employee;
-import gr.hua.dit.Ergasia.model.Role;
-import gr.hua.dit.Ergasia.model.DepartmentService;
-import gr.hua.dit.Ergasia.repository.EmployeeRepository;
-import gr.hua.dit.Ergasia.repository.DepartmentServiceRepository;
+import gr.hua.dit.Ergasia.core.model.Employee;
+import gr.hua.dit.Ergasia.core.model.Role;
+import gr.hua.dit.Ergasia.core.model.DepartmentService;
+import gr.hua.dit.Ergasia.core.repository.EmployeeRepository;
+import gr.hua.dit.Ergasia.core.repository.DepartmentServiceRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,1 @@
+package gr.hua.dit.Ergasia.core.model;
