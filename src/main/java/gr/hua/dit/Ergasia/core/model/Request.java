@@ -2,6 +2,7 @@ package gr.hua.dit.Ergasia.core.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -78,5 +79,16 @@ public class Request {
         this.comment = comment;
     }
 
-}
+    public void setRequestType(RequestType type) {
+    }
 
+    public void setDescription(String description) {
+    }
+
+    public void setDate(LocalDateTime now) {
+    }
+
+    public String getId() {
+        return id.toString();
+    }
+}

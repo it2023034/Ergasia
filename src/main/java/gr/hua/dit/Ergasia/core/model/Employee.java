@@ -27,4 +27,3 @@ public class Employee extends User{
         this.departmentService = departmentService;
     }
 }
-

@@ -36,6 +36,11 @@ public class RequestTypeService {
         return requestTypeRepository.save(type);
     }
 
+    public RequestType findById(Long id) {
+        return requestTypeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Request Type not found with id: " + id));
+    }
+
     public RequestType assignDepartment(Long requestTypeId, Long departmentId) {
         RequestType rt = requestTypeRepository.findById(requestTypeId)
                 .orElseThrow(() -> new RuntimeException("Request type not found"));

@@ -14,6 +14,9 @@ public class AppointmentSlot {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    @Column(name = "is_booked")
+    private boolean isBooked;
+
     @ManyToOne
     @JoinColumn(name = "department_id")
     private DepartmentService departmentService;
@@ -25,6 +28,14 @@ public class AppointmentSlot {
         this.startTime = startTime;
         this.endTime = endTime;
         this.departmentService = departmentService;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
     }
 
     public Long getId() {
