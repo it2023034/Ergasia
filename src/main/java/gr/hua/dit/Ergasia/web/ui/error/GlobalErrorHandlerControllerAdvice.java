@@ -1,4 +1,4 @@
-package gr.hua.dit.Ergasia.web.ui;
+package gr.hua.dit.Ergasia.web.ui.error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
