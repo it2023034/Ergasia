@@ -1,22 +1,70 @@
 package gr.hua.dit.Ergasia.config;
 
+import gr.hua.dit.Ergasia.core.security.JwtAuthenticationFilter;
+import gr.hua.dit.Ergasia.web.rest.error.RestApiAccessDeniedHandler;
+import gr.hua.dit.Ergasia.web.rest.error.RestApiAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    /**
+     * JWT API chain (stateless) για REST endpoints.
+     */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+    @Order(1)
+    public SecurityFilterChain apiChain(
+            HttpSecurity http,
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            RestApiAuthenticationEntryPoint restApiAuthenticationEntryPoint,
+            RestApiAccessDeniedHandler restApiAccessDeniedHandler
+    ) throws Exception {
         http
+                .securityMatcher("/api/v1/**")
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/auth/client-tokens").permitAll()
+                        .requestMatchers("/api/v1/**").authenticated()
+                )
+                .exceptionHandling(exh -> exh
+                        .authenticationEntryPoint(restApiAuthenticationEntryPoint)
+                        .accessDeniedHandler(restApiAccessDeniedHandler)
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable);
+
+        return http.build();
+    }
+
+    /**
+     * UI chain (stateful) για web login με cookies.
+     */
+    @Bean
+    @Order(2)
+    public SecurityFilterChain uiChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/**")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login", "/register").permitAll()
+                        .requestMatchers("/profile", "/logout").authenticated()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .anyRequest().permitAll()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
@@ -31,11 +79,7 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/api/login", "/register", "/h2-console/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(basic -> {});
+                .httpBasic(AbstractHttpConfigurer::disable);
 
         return http.build();
     }

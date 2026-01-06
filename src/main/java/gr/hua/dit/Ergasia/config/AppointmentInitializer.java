@@ -8,6 +8,7 @@ import gr.hua.dit.Ergasia.core.repository.RequestRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class AppointmentInitializer {
 
     @Bean
+    @Order(4)
     CommandLineRunner initAppointments(AppointmentRepository appointmentRepo,
                                        RequestRepository requestRepo) {
         return args -> {

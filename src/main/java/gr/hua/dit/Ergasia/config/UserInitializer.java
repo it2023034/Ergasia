@@ -6,12 +6,14 @@ import gr.hua.dit.Ergasia.core.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class UserInitializer {
 
     @Bean
+    @Order(1)
     CommandLineRunner initDatabase(UserRepository repo, PasswordEncoder encoder) {
         return args -> {
 
