@@ -3,6 +3,7 @@ package gr.hua.dit.Ergasia.web.controller;
 import gr.hua.dit.Ergasia.web.dto.ApplicationRequest;
 import gr.hua.dit.Ergasia.core.model.Application;
 import gr.hua.dit.Ergasia.core.service.ApplicationService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +33,8 @@ public class ApplicationController {
     // ΣΗΜΕΙΩΣΗ: Στο Postman/React πρέπει να στείλεις 'Content-Type: multipart/form-data'
     @PostMapping(consumes = {"multipart/form-data"})
     public ResponseEntity<?> submitApplication(
-            @ModelAttribute ApplicationRequest request, // Τα πεδία κειμένου (type, description)
-            @RequestParam(value = "file", required = false) MultipartFile file // Το αρχείο
+            @Valid @ModelAttribute ApplicationRequest request, // <--- Εδώ
+            @RequestParam(value = "file", required = false) MultipartFile file
     ) {
         try {
             Application savedApp = applicationService.submitApplication(request, file);
@@ -42,6 +43,7 @@ public class ApplicationController {
             return ResponseEntity.status(500).body("Σφάλμα κατά το ανέβασμα του αρχείου.");
         }
     }
+
 
     // Endpoint 3: Παρακολούθηση (Οι αιτήσεις μου)
     @GetMapping("/my")

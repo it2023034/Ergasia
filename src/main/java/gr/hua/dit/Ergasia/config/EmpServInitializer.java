@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class EmpServInitializer {
 
     @Bean
-    @Order(2)
+    @Order(3)
     CommandLineRunner initEmployees(EmployeeRepository employeeRepo,
                                     DepartmentServiceRepository serviceRepo,
                                     PasswordEncoder encoder) {
