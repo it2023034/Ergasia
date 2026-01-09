@@ -5,6 +5,8 @@ import gr.hua.dit.Ergasia.web.dto.RegisterRequest;
 import gr.hua.dit.Ergasia.core.model.Role;
 import gr.hua.dit.Ergasia.core.model.User;
 import gr.hua.dit.Ergasia.core.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Random;
 
 @Service
 public class UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -41,12 +45,21 @@ public class UserService {
     }
 
     public User registerCitizen(RegisterRequest req) {
-        if (userRepository.existsByUsername(req.getUsername())) throw new RuntimeException("Username exists");
-        if (userRepository.existsByEmail(req.getEmail())) throw new RuntimeException("Email exists");
-        if (userRepository.existsByAfm(req.getAfm())) throw new RuntimeException("AFM exists");
-        if (userRepository.existsByIdCardNumber(req.getIdCardNumber())) throw new RuntimeException("ID Card exists");
+
+        if (userRepository.existsByUsername(req.getUsername()))
+            throw new RuntimeException("Username already exists");
+
+        if (userRepository.existsByEmail(req.getEmail()))
+            throw new RuntimeException("Email already exists");
+
+        if (userRepository.existsByAfm(req.getAfm()))
+            throw new RuntimeException("AFM already exists");
+
+        if (userRepository.existsByIdCardNumber(req.getIdCardNumber()))
+            throw new RuntimeException("ID card number already exists");
 
         User user = new User();
+        user.setId(generateUniqueId("15"));
         user.setUsername(req.getUsername());
         user.setPassword(passwordEncoder.encode(req.getPassword()));
         user.setRole(Role.CITIZEN);
@@ -66,10 +79,16 @@ public class UserService {
         user.setStreetNumber(req.getStreetNumber());
         user.setPhone(req.getPhone());
 
-        String generatedId = generateUniqueId("15");
-        user.setId(generatedId);
+        User savedUser = userRepository.save(user);
 
-        return userRepository.save(user);
+        log.info(
+                "New citizen registered | id={} | username={} | email={}",
+                savedUser.getId(),
+                savedUser.getUsername(),
+                savedUser.getEmail()
+        );
+
+        return savedUser;
     }
 
     private String generateUniqueId(String prefix) {

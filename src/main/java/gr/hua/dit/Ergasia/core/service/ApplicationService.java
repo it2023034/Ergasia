@@ -30,13 +30,22 @@ public class ApplicationService {
         this.userRepository = userRepository;
     }
 
+    // Utility method για ασφαλή ανάκτηση του username
+    private String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            return userDetails.getUsername();
+        }
+        return principal.toString(); // Αν είναι απλό String
+    }
+
     public Map<String, String> getAvailableServices() {
         return Arrays.stream(ApplicationType.values())
                 .collect(Collectors.toMap(Enum::name, ApplicationType::getDescription));
     }
 
     public Application submitApplication(ApplicationRequest request, MultipartFile file) throws IOException {
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -56,7 +65,7 @@ public class ApplicationService {
     }
 
     public List<Application> getMyApplications() {
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

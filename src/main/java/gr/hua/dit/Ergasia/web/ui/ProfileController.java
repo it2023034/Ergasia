@@ -1,4 +1,4 @@
-package gr.hua.dit.Ergasia.web.controller;
+package gr.hua.dit.Ergasia.web.ui;
 
 import gr.hua.dit.Ergasia.core.model.User;
 import gr.hua.dit.Ergasia.core.service.UserService;

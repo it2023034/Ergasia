@@ -1,78 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
 <head>
-    <meta charset="UTF-8">
     <title>Register</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .register-container {
-            width: 350px;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-
-        .register-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: 1px solid #aaa;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #28a745;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #1e7e34;
-        }
-    </style>
 </head>
+
 <body>
+<div layout:fragment="main" class="container mt-5">
 
-<div class="register-container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
 
-    <h2>Register</h2>
+            <div class="card shadow">
+                <div class="card-body">
 
-    <form th:action="@{/register}" method="post">
+                    <h3 class="text-center mb-4">Register</h3>
 
-        <input type="text" name="username" placeholder="Username" required>
+                    <!-- Generic error message from controller -->
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
 
-        <input type="email" name="email" placeholder="Email" required>
+                    <form th:action="@{/register}"
+                          th:object="${registerRequest}"
+                          method="post">
 
-        <input type="password" name="password" placeholder="Password" required>
+                        <!-- Validation errors (MUST be inside form) -->
+                        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            Please correct the highlighted errors.
+                        </div>
 
-        <button type="submit">Sign Up</button>
-    </form>
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text"
+                                   th:field="*{username}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{username}"></div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email"
+                                   th:field="*{email}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{email}"></div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password"
+                                   th:field="*{password}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{password}"></div>
+                        </div>
+
+                        <!-- AFM -->
+                        <div class="mb-3">
+                            <label class="form-label">AFM</label>
+                            <input type="text"
+                                   th:field="*{afm}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{afm}"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Sign Up
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a th:href="@{/login}">Already have an account?</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>
-
 </body>
 </html>

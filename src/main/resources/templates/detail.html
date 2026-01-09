@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="el"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+<head>
+  <title>Provoli Aitis</title>
+</head>
+<body>
+<div layout:fragment="main" class="container mt-5">
+
+  <h2>Provoli Aitis</h2>
+
+  <p><strong>ID:</strong> <span th:text="${application.id}"></span></p>
+  <p><strong>Typos:</strong> <span th:text="${application.type}"></span></p>
+  <p><strong>Perigrafi:</strong> <span th:text="${application.description}"></span></p>
+  <p><strong>Status:</strong> <span th:text="${application.status}"></span></p>
+  <p><strong>Created At:</strong> <span th:text="${application.createdAt}"></span></p>
+
+  <p th:if="${application.fileName != null}">
+    <strong>Arxeio:</strong>
+    <a th:href="@{'/files/' + ${application.id}}" th:text="${application.fileName}">Download</a>
+  </p>
+
+  <a th:href="@{/applications}" class="btn btn-secondary">Pisw stin lista</a>
+</div>
+</body>
+</html>

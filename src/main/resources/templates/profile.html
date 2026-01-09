@@ -1,73 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
 <head>
-    <meta charset="UTF-8">
     <title>Profile</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .profile-container {
-            width: 380px;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .profile-container h2 {
-            margin-bottom: 20px;
-        }
-
-        .info {
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .info p {
-            margin: 8px 0;
-            font-size: 16px;
-        }
-
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        a:hover {
-            background: #0056c9;
-        }
-    </style>
 </head>
+
 <body>
 
-<div class="profile-container">
+<header layout:fragment="header">
+    <h1>GovGr <small>/ Profile</small></h1>
+</header>
 
-    <h2>Your Profile</h2>
+<section layout:fragment="main">
 
-    <div class="info">
-        <p><strong>Username:</strong> <span th:text="${user.username}">demoUser</span></p>
-        <p><strong>Email:</strong> <span th:text="${user.email}">demo@example.com</span></p>
-        <p><strong>Role:</strong> <span th:text="${user.role}">USER</span></p>
+    <div class="profile-container" style="max-width: 400px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.1);">
+
+        <h2>Your Profile</h2>
+
+        <div class="info" style="text-align: left; margin-top: 20px;">
+            <p><strong>Username:</strong> <span th:text="${user.username}">demoUser</span></p>
+            <p><strong>Email:</strong> <span th:text="${user.email}">demo@example.com</span></p>
+            <p><strong>Role:</strong> <span th:text="${user.role}">USER</span></p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a th:href="@{/logout}" class="btn btn-primary">Logout</a>
+        </div>
+
     </div>
 
-    <a th:href="@{/logout}">Logout</a>
-
-</div>
+</section>
 
 </body>
 </html>

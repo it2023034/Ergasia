@@ -1,4 +1,4 @@
-package gr.hua.dit.Ergasia.web.controller;
+package gr.hua.dit.Ergasia.web.ui;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

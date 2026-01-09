@@ -1,86 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
 <head>
-    <meta charset="UTF-8">
     <title>Login</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            width: 350px;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: 1px solid #aaa;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #0056c9;
-        }
-
-        .error {
-            color: red;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-    </style>
 </head>
+
 <body>
 
-<div class="login-container">
+<header layout:fragment="header">
+    <h1>GovGr <small>/ Login</small></h1>
+</header>
 
-    <h2>Login</h2>
-
-    <!-- Error message from Spring Security -->
-    <p th:if="${param.error}" class="error">Invalid username or password</p>
-    <p th:if="${param.logout}" class="error" style="color:green;">You have been logged out</p>
+<section layout:fragment="main">
 
     <form th:action="@{/login}" method="post">
 
-        <input type="text" name="username" placeholder="Username" required>
+        <!-- MESSAGE -->
+        <div class="text-center mb-3" th:if="${message}">
+            <p class="text-primary" th:text="${message}"></p>
+        </div>
 
-        <input type="password" name="password" placeholder="Password" required>
+        <!-- ERROR MESSAGE -->
+        <div class="text-center mb-3" th:if="${error}">
+            <p class="text-danger" th:text="${error}"></p>
+        </div>
 
-        <button type="submit">Login</button>
+        <!-- FORM CONTROLS -->
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input name="username" type="text" class="form-control" required autofocus>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" required>
+        </div>
+
+        <div class="mb-4">
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+
+        <p><a th:href="@{/register}">Don't have an account? Register</a></p>
+
     </form>
 
-</div>
+</section>
 
 </body>
 </html>

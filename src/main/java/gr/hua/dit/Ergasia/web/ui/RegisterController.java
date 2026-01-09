@@ -1,4 +1,4 @@
-package gr.hua.dit.Ergasia.web.controller;
+package gr.hua.dit.Ergasia.web.ui;
 
 import gr.hua.dit.Ergasia.web.dto.RegisterRequest;
 import gr.hua.dit.Ergasia.web.dto.noc.UserLookupResult; // Βεβαιωθείτε ότι έχετε δημιουργήσει αυτό το DTO
