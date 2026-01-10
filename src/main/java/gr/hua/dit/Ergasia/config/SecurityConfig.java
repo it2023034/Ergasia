@@ -33,12 +33,12 @@ public class SecurityConfig {
             RestApiAccessDeniedHandler restApiAccessDeniedHandler
     ) throws Exception {
         http
-                .securityMatcher("/api/v1/**")
+                .securityMatcher("/api/**")
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/client-tokens").permitAll()
-                        .requestMatchers("/api/v1/**").authenticated()
+                        .requestMatchers("/api/**").permitAll()
                 )
                 .exceptionHandling(exh -> exh
                         .authenticationEntryPoint(restApiAuthenticationEntryPoint)
@@ -51,6 +51,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+
     /**
      * UI chain (stateful) για web login με cookies.
      */
@@ -61,8 +62,10 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/register").permitAll()
-                        .requestMatchers("/profile", "/logout").authenticated()
+                        .requestMatchers("/profile", "/logout", "/applications/**").authenticated()
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/home", "/statistics", "/departments", "/request-types", "/appointments").hasRole("ADMIN")
+                        .requestMatchers(("/employee/**")).hasRole("EMPLOYEE")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

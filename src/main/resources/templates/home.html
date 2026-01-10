@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}"
+        lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
+
+<body>
+
+<main layout:fragment="main" class="container mt-5">
+
+  <h1 class="mb-4">Welcome to Ergasia</h1>
+  <p>Please choose one of the following sections:</p>
+
+  <div class="d-flex flex-column gap-2 mt-3">
+    <a th:href="@{/departments}" class="btn btn-primary">Departments</a>
+    <a th:href="@{/request-types}" class="btn btn-primary">Request Types</a>
+    <a th:href="@{/appointments}" class="btn btn-primary">Appointments</a>
+    <a th:href="@{/statistics}" class="btn btn-primary">Statistics</a>
+  </div>
+
+</main>
+
+</body>
+</html>

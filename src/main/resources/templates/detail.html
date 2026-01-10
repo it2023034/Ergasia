@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html lang="el"
+<html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base}">
 <head>
-  <title>Provoli Aitis</title>
+  <title>Application Details</title>
 </head>
 <body>
+
 <div layout:fragment="main" class="container mt-5">
 
-  <h2>Provoli Aitis</h2>
+  <h2>Application Details</h2>
 
-  <p><strong>ID:</strong> <span th:text="${application.id}"></span></p>
-  <p><strong>Typos:</strong> <span th:text="${application.type}"></span></p>
-  <p><strong>Perigrafi:</strong> <span th:text="${application.description}"></span></p>
-  <p><strong>Status:</strong> <span th:text="${application.status}"></span></p>
-  <p><strong>Created At:</strong> <span th:text="${application.createdAt}"></span></p>
+  <p><strong>ID:</strong> <span th:text="${app.id}"></span></p>
 
-  <p th:if="${application.fileName != null}">
-    <strong>Arxeio:</strong>
-    <a th:href="@{'/files/' + ${application.id}}" th:text="${application.fileName}">Download</a>
+  <p><strong>Type:</strong> <span th:text="${app.type}"></span></p>
+
+  <p><strong>Description:</strong> <span th:text="${app.description}"></span></p>
+
+  <p><strong>Status:</strong> <span th:text="${app.status}"></span></p>
+
+  <p>
+    <strong>Created At:</strong>
+    <span th:text="${#temporals.format(app.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
   </p>
 
-  <a th:href="@{/applications}" class="btn btn-secondary">Pisw stin lista</a>
+  <p th:if="${app.fileName != null}">
+    <strong>Attached File:</strong>
+    <a th:href="@{'/files/' + ${app.id}}"
+       th:text="${app.fileName}">
+    </a>
+  </p>
+
+  <a th:href="@{/applications/list}" class="btn btn-secondary">
+    Back to list
+  </a>
+
 </div>
+
 </body>
 </html>

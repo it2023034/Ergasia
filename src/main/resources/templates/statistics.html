@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+  <title>Statistics</title>
+</head>
+
+<body>
+<div layout:fragment="main">
+
+  <h3>Statistics</h3>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      Total Departments:
+      <strong th:text="${stats.totalDepartments}"></strong>
+    </li>
+    <li class="list-group-item">
+      Total Request Types:
+      <strong th:text="${stats.totalRequestTypes}"></strong>
+    </li>
+    <li class="list-group-item">
+      Total Appointments:
+      <strong th:text="${stats.totalAppointmentSlots}"></strong>
+    </li>
+  </ul>
+
+  <!-- Back button -->
+  <div class="mt-3">
+    <a th:href="@{/home}" class="btn btn-secondary">Back to Home</a>
+  </div>
+
+</div>
+</body>
+</html>

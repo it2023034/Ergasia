@@ -46,16 +46,16 @@ public class UserService {
 
     public User registerCitizen(RegisterRequest req) {
 
-        if (userRepository.existsByUsername(req.getUsername()))
+        if (!userRepository.existsByUsername(req.getUsername()))
             throw new RuntimeException("Username already exists");
 
-        if (userRepository.existsByEmail(req.getEmail()))
+        if (!userRepository.existsByEmail(req.getEmail()))
             throw new RuntimeException("Email already exists");
 
-        if (userRepository.existsByAfm(req.getAfm()))
+        if (!userRepository.existsByAfm(req.getAfm()))
             throw new RuntimeException("AFM already exists");
 
-        if (userRepository.existsByIdCardNumber(req.getIdCardNumber()))
+        if (!userRepository.existsByIdCardNumber(req.getIdCardNumber()))
             throw new RuntimeException("ID card number already exists");
 
         User user = new User();

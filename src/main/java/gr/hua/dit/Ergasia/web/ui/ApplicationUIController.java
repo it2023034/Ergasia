@@ -54,7 +54,7 @@ public class ApplicationUIController {
                 .filter(a -> a.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Application not found"));
-        model.addAttribute("application", app);
+        model.addAttribute("app", app);
         return "detail"; // templates/applications/detail.html
     }
 }
