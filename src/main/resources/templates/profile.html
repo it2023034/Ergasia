@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+    <title>Profile</title>
+</head>
+
+<body>
+
+<header layout:fragment="header">
+    <h1>GovGr <small>/ Profile</small></h1>
+</header>
+
+<section layout:fragment="main">
+
+    <div class="profile-container" style="max-width: 400px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.1);">
+
+        <h2>Your Profile</h2>
+
+        <div class="info" style="text-align: left; margin-top: 20px;">
+            <p><strong>Username:</strong> <span th:text="${user.username}">demoUser</span></p>
+            <p><strong>Email:</strong> <span th:text="${user.email}">demo@example.com</span></p>
+            <p><strong>Role:</strong> <span th:text="${user.role}">USER</span></p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a th:href="@{/logout}" class="btn btn-primary">Logout</a>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
