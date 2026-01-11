@@ -30,34 +30,44 @@ public class EmpServInitializer {
             DepartmentService service5 = getOrCreateService(serviceRepo, "KEP Tmima Oikonomikon");
 
             createEmployee(employeeRepo, encoder, "empl_nikolaou", "4500000011",
-                    "n.nikolaou@gov.gr", "emp123", "Nikos", "Nikolaou", service1);
+                    "n.nikolaou@gov.gr", "emp123", "Nikos", "Nikolaou", service1,
+                    "852741963", "6941111122");
 
             createEmployee(employeeRepo, encoder, "empl_papageorgiou", "4500000012",
-                    "g.papageorgiou@gov.gr", "emp1234", "Georgia", "Papageorgiou", service2);
+                    "g.papageorgiou@gov.gr", "emp1234", "Georgia", "Papageorgiou", service2,
+                    "963852741", "6942222233");
 
             createEmployee(employeeRepo, encoder, "empl_karapiperis", "4500000013",
-                    "a.karapiperis@gov.gr", "emp12345", "Alexandros", "Karapiperis", service3);
+                    "a.karapiperis@gov.gr", "emp12345", "Alexandros", "Karapiperis", service3,
+                    "741258963", "6943333344");
 
             createEmployee(employeeRepo, encoder, "empl_tsoklis", "4500000014",
-                    "m.tsoklis@gov.gr", "emp567", "Maria", "Tsoklis", service4);
+                    "m.tsoklis@gov.gr", "emp567", "Maria", "Tsoklis", service4,
+                    "159357486", "6944444455");
 
             createEmployee(employeeRepo, encoder, "empl_vlachos", "4500000015",
-                    "d.vlachos@gov.gr", "emp890", "Dimitris", "Vlachos", service5);
+                    "d.vlachos@gov.gr", "emp890", "Dimitris", "Vlachos", service5,
+                    "258963147", "6945555566");
 
             createEmployee(employeeRepo, encoder, "empl_makris", "4500000016",
-                    "s.makris@gov.gr", "emp321", "Sofia", "Makris", service1);
+                    "s.makris@gov.gr", "emp321", "Sofia", "Makris", service1,
+                    "369852741", "6946666677");
 
             createEmployee(employeeRepo, encoder, "empl_papathanasiou", "4500000017",
-                    "k.papathanasiou@gov.gr", "emp654", "Konstantinos", "Papathanasiou", service2);
+                    "k.papathanasiou@gov.gr", "emp654", "Konstantinos", "Papathanasiou", service2,
+                    "147258369", "6947777788");
 
             createEmployee(employeeRepo, encoder, "empl_georgiou", "4500000018",
-                    "e.georgiou@gov.gr", "emp987", "Eleni", "Georgiou", service3);
+                    "e.georgiou@gov.gr", "emp987", "Eleni", "Georgiou", service3,
+                    "963741852", "6948888899");
 
             createEmployee(employeeRepo, encoder, "empl_kostopoulos", "4500000019",
-                    "p.kostopoulos@gov.gr", "emp111", "Panagiotis", "Kostopoulos", service4);
+                    "p.kostopoulos@gov.gr", "emp111", "Panagiotis", "Kostopoulos", service4,
+                    "852963741", "6949999900");
 
             createEmployee(employeeRepo, encoder, "empl_roumeliotis", "4500000020",
-                    "l.roumeliotis@gov.gr", "emp222", "Lefteris", "Roumeliotis", service5);
+                    "l.roumeliotis@gov.gr", "emp222", "Lefteris", "Roumeliotis", service5,
+                    "741369852", "6941010101");
         };
     }
 
@@ -75,9 +85,10 @@ public class EmpServInitializer {
                                 String username, String id,
                                 String email, String password,
                                 String firstName, String lastName,
-                                DepartmentService departmentService) {
+                                DepartmentService departmentService,
+                                String afm, String phone) {
 
-        if (repo.existsByUsername(username)) return;
+//        if (repo.existsByUsername(username)) return;
 
         Employee emp = new Employee();
         emp.setId(id);
@@ -88,6 +99,8 @@ public class EmpServInitializer {
         emp.setFirstName(firstName);
         emp.setLastName(lastName);
         emp.setDepartmentService(departmentService);
+        emp.setAfm(afm);
+        emp.setPhone(phone);
 
         repo.save(emp);
     }

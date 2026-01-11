@@ -37,7 +37,7 @@
                         <button class="btn btn-sm btn-secondary ms-1" type="submit">Add</button>
                     </form>
 
-υ                    <form th:action="@{'/employee/requests/' + ${r.id} + '/status'}" method="post" class="d-flex">
+                    <form th:action="@{'/employee/requests/' + ${r.id} + '/status'}" method="post" class="d-flex">
                         <select name="status" class="form-select form-select-sm" required>
                             <option th:value="RECEIVED" th:text="'RECEIVED'"></option>
                             <option th:value="IN_PROGRESS" th:text="'IN_PROGRESS'"></option>

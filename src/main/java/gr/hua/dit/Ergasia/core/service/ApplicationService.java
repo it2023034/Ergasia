@@ -5,8 +5,10 @@ import gr.hua.dit.Ergasia.core.model.Application;
 import gr.hua.dit.Ergasia.core.model.ApplicationStatus;
 import gr.hua.dit.Ergasia.core.model.User;
 import gr.hua.dit.Ergasia.core.model.ApplicationType;
+import gr.hua.dit.Ergasia.core.model.DepartmentService;
 import gr.hua.dit.Ergasia.core.repository.ApplicationRepository;
 import gr.hua.dit.Ergasia.core.repository.UserRepository;
+import gr.hua.dit.Ergasia.core.repository.DepartmentServiceRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,14 @@ public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
     private final UserRepository userRepository;
+    private final DepartmentServiceRepository departmentServiceRepository;
 
-    public ApplicationService(ApplicationRepository applicationRepository, UserRepository userRepository) {
+    public ApplicationService(ApplicationRepository applicationRepository,
+                              UserRepository userRepository,
+                              DepartmentServiceRepository departmentServiceRepository) {
         this.applicationRepository = applicationRepository;
         this.userRepository = userRepository;
+        this.departmentServiceRepository = departmentServiceRepository;
     }
 
     // Utility method για ασφαλή ανάκτηση του username
@@ -39,11 +45,13 @@ public class ApplicationService {
         return principal.toString(); // Αν είναι απλό String
     }
 
+    // Λίστα διαθέσιμων τύπων αιτήσεων
     public Map<String, String> getAvailableServices() {
         return Arrays.stream(ApplicationType.values())
                 .collect(Collectors.toMap(Enum::name, ApplicationType::getDescription));
     }
 
+    // Υποβολή αίτησης
     public Application submitApplication(ApplicationRequest request, MultipartFile file) throws IOException {
         String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
@@ -55,6 +63,12 @@ public class ApplicationService {
         app.setStatus(ApplicationStatus.SUBMITTED);
         app.setCreatedAt(LocalDateTime.now());
         app.setCitizen(currentUser);
+        app.setAppointmentDate(request.getAppointmentDate());
+
+        // Προσθήκη υπηρεσίας
+        DepartmentService service = departmentServiceRepository.findById(request.getServiceId())
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+        app.setService(service);
 
         if (file != null && !file.isEmpty()) {
             app.setFileName(file.getOriginalFilename());
@@ -64,6 +78,7 @@ public class ApplicationService {
         return applicationRepository.save(app);
     }
 
+    // Λίστα αιτήσεων του τρέχοντος χρήστη
     public List<Application> getMyApplications() {
         String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)

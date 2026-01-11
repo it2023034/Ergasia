@@ -20,21 +20,25 @@
 
   <p><strong>Status:</strong> <span th:text="${app.status}"></span></p>
 
-  <p>
-    <strong>Created At:</strong>
+  <p><strong>Created At:</strong>
     <span th:text="${#temporals.format(app.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+  </p>
+
+  <p th:if="${app.service != null}">
+    <strong>Service:</strong> <span th:text="${app.service.serviceName}"></span>
+  </p>
+
+  <p th:if="${app.appointmentDate != null}">
+    <strong>Appointment Date & Time:</strong>
+    <span th:text="${#temporals.format(app.appointmentDate, 'yyyy-MM-dd HH:mm')}"></span>
   </p>
 
   <p th:if="${app.fileName != null}">
     <strong>Attached File:</strong>
-    <a th:href="@{'/files/' + ${app.id}}"
-       th:text="${app.fileName}">
-    </a>
+    <a th:href="@{'/files/' + ${app.id}}" th:text="${app.fileName}"></a>
   </p>
 
-  <a th:href="@{/applications/list}" class="btn btn-secondary">
-    Back to list
-  </a>
+  <a th:href="@{/applications/list}" class="btn btn-secondary">Back to list</a>
 
 </div>
 

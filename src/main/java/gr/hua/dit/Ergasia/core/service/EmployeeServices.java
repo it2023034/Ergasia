@@ -25,7 +25,9 @@ public class EmployeeServices {
     }
 
     public List<Request> showListOfRequests(Employee employee) {
+
         DepartmentService departmentService = employee.getDepartmentService();
+
         if (departmentService == null) {
             logger.warn("Employee {} has no assigned service", employee.getLastName() + " " + employee.getFirstName());
             return List.of();
@@ -34,12 +36,13 @@ public class EmployeeServices {
         List<Request> requests = requestRepository.findByDepartmentService(departmentService);
 
         for (Request r : requests) {
-            String nameOfEmployee = r.getEmployee() != null ? r.getEmployee().getLastName() + r.getEmployee().getFirstName() : "None";
+            String nameOfEmployee = r.getEmployee() != null ? r.getEmployee().getLastName() + " " + r.getEmployee().getFirstName() : "None";
             logger.info("Request: {} | Status: {} | Assigned to: {}", r.getTitle(), r.getStatus(), nameOfEmployee);
         }
 
         return requests;
     }
+
 
     public void assignRequest(Request request, Employee employee) {
         request.setEmployee(employee);

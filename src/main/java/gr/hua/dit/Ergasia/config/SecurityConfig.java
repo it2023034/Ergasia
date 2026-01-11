@@ -66,6 +66,7 @@ public class SecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/home", "/statistics", "/departments", "/request-types", "/appointments").hasRole("ADMIN")
                         .requestMatchers(("/employee/**")).hasRole("EMPLOYEE")
+                        .requestMatchers("/", "/login", "/register", "/login/gov/callback", "/css/", "/js/").permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

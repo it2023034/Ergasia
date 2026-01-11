@@ -34,8 +34,26 @@
       <input class="form-control" type="file" name="file">
     </div>
 
+    <!-- Επιλογή Υπηρεσίας -->
+    <div class="mb-3">
+      <label class="form-label">Epilege Ypiresia</label>
+      <select class="form-select" th:field="*{serviceId}" required>
+        <option value="" disabled selected>Epilexte...</option>
+        <option th:each="service : ${services}"
+                th:value="${service.id}"
+                th:text="${service.serviceName}">
+        </option>
+      </select>
+    </div>
+
+    <!-- Ημερομηνία / Ώρα Ραντεβού -->
+    <div class="mb-3">
+      <label class="form-label">Epilege Hmerominia / Ora Rantevou</label>
+      <input class="form-control" type="datetime-local" th:field="*{appointmentDate}" required>
+    </div>
+
     <button type="submit" class="btn btn-primary">Ypoboli</button>
-    <a th:href="@{/applications}" class="btn btn-secondary">Akyrwsi</a>
+    <a th:href="@{/applications/list}" class="btn btn-secondary">Akyrwsi</a>
   </form>
 </div>
 </body>

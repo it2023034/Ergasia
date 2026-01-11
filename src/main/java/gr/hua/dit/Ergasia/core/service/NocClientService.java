@@ -16,13 +16,6 @@ public class NocClientService {
         this.restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 
-    public UserLookupResult lookupUser(String id) {
-        return restClient.get()
-                .uri("/lookups/{Id}", id)
-                .retrieve()
-                .body(UserLookupResult.class);
-    }
-
     public void sendSms(String phoneNumber, String message) {
         restClient.post()
                 .uri("/sms")
