@@ -16,7 +16,7 @@ public class CitizenInitializer {
     @Order(2) // τρέχει μετά τον UserInitializer
     CommandLineRunner initCitizens(UserRepository repo, PasswordEncoder encoder) {
         return args -> {
-            createCitizen(repo, encoder, "jkaralis", "2500000001", "ioannis.karalis@gmail.com", "test1234", "123456789", "6941234567");
+            createCitizen(repo, encoder, "jkaralis", "2500000001", "ioannis.karalis@gmail.com", "test1234", "123456789", "6989704499");
             createCitizen(repo, encoder, "maria.l", "2500000002", "mar.lamprou@gmail.com", "pass9988", "987654321", "6942345678");
             createCitizen(repo, encoder, "d_pap", "2500000003", "dpap@gmail.com", "hello123", "456789123", "6943456789");
             createCitizen(repo, encoder, "vicky89", "2500000004", "v.ralli@gmail.com", "mypassword", "321654987", "6944567890");
@@ -39,6 +39,10 @@ public class CitizenInitializer {
         u.setPassword(encoder.encode(password));
         u.setRole(Role.CITIZEN);
         u.setAfm(afm);
+
+        if (!phone.startsWith("+30")) {
+            phone = "+30" + phone;
+        }
         u.setPhone(phone);
 
         repo.save(u);

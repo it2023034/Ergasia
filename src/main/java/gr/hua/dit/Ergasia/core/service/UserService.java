@@ -46,17 +46,23 @@ public class UserService {
 
     public User registerCitizen(RegisterRequest req) {
 
-        if (!userRepository.existsByUsername(req.getUsername()))
+        if (userRepository.existsByUsername(req.getUsername()))
             throw new RuntimeException("Username already exists");
 
-        if (!userRepository.existsByEmail(req.getEmail()))
+        if (userRepository.existsByEmail(req.getEmail()))
             throw new RuntimeException("Email already exists");
 
-        if (!userRepository.existsByAfm(req.getAfm()))
+        if (userRepository.existsByAfm(req.getAfm()))
             throw new RuntimeException("AFM already exists");
 
-        if (!userRepository.existsByIdCardNumber(req.getIdCardNumber()))
+        if (req.getIdCardNumber() == null || req.getIdCardNumber().isBlank())
+            throw new RuntimeException("ID card number is required");
+
+        if (userRepository.existsByIdCardNumber(req.getIdCardNumber()))
             throw new RuntimeException("ID card number already exists");
+
+        if (req.getPhone() == null || req.getPhone().isBlank())
+            throw new RuntimeException("Phone is required");
 
         User user = new User();
         user.setId(generateUniqueId("15"));
@@ -77,7 +83,11 @@ public class UserService {
         user.setResidencePlace(req.getResidencePlace());
         user.setStreet(req.getStreet());
         user.setStreetNumber(req.getStreetNumber());
-        user.setPhone(req.getPhone());
+        String phone = req.getPhone();
+        if (phone != null && !phone.startsWith("+30")) {
+            phone = "+30" + phone;
+        }
+        user.setPhone(phone);
 
         User savedUser = userRepository.save(user);
 

@@ -77,6 +77,30 @@
                                  th:errors="*{afm}"></div>
                         </div>
 
+                        <!-- ID Card Number -->
+                        <div class="mb-3">
+                            <label class="form-label">ID Card Number</label>
+                            <input type="text"
+                                   th:field="*{idCardNumber}"
+                                   class="form-control"
+                                   placeholder="e.g. AB123456"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{idCardNumber}"></div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text"
+                                   th:field="*{phone}"
+                                   class="form-control"
+                                   placeholder="e.g. 6912345678"
+                                   required>
+                            <div class="text-danger"
+                                 th:errors="*{phone}"></div>
+                        </div>
+
                         <button type="submit" class="btn btn-success w-100">
                             Sign Up
                         </button>

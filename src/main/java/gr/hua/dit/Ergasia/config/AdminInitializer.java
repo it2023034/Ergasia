@@ -25,7 +25,7 @@ public class AdminInitializer {
     private void createAdmin(UserRepository repo, PasswordEncoder encoder,
                              String username, String id, String email, String password,
                              String afm, String phone) {
-//        if (repo.existsByUsername(username)) return;
+        if (repo.existsByUsername(username)) return;
 
         User admin = new User();
         admin.setId(id);

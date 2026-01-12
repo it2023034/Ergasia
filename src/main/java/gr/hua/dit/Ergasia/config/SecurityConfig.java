@@ -64,7 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/login", "/register").permitAll()
                         .requestMatchers("/profile", "/logout", "/applications/**").authenticated()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/home", "/statistics", "/departments", "/request-types", "/appointments").hasRole("ADMIN")
+                        .requestMatchers("/home", "/statistics", "/departments", "/request-types", "/appointments", "request-type").hasRole("ADMIN")
                         .requestMatchers(("/employee/**")).hasRole("EMPLOYEE")
                         .requestMatchers("/", "/login", "/register", "/login/gov/callback", "/css/", "/js/").permitAll()
                         .anyRequest().permitAll()

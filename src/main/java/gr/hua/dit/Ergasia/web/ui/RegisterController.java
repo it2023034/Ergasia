@@ -43,7 +43,7 @@ public class RegisterController {
         try {
             // Πλέον η εγγραφή γίνεται απευθείας χωρίς εξωτερικό έλεγχο lookup
             userService.registerCitizen(request);
-            return "redirect:/login?message=Η εγγραφή ολοκληρώθηκε επιτυχώς.";
+            return "redirect:/login?message=Registration complete";
         } catch (RuntimeException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "register";

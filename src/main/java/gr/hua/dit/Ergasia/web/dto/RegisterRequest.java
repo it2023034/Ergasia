@@ -19,6 +19,15 @@ public class RegisterRequest {
 
     @NotBlank
     private String afm;
+
+    @NotBlank
+    @Size(min = 6, max = 20)
+    private String idCardNumber;
+
+    @NotBlank
+    @Size(min = 10, max = 15)
+    private String phone;
+
     private String firstName;
     private String lastName;
     private String fatherName;
@@ -27,11 +36,9 @@ public class RegisterRequest {
     private String motherSurname;
     private String dob;
     private String birthPlace;
-    private String idCardNumber;
     private String residencePlace;
     private String street;
     private String streetNumber;
-    private String phone;
 
     // Getters and Setters
     public String getUsername() { return username; }
