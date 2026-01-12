@@ -30,19 +30,25 @@ public class GovLoginCallbackController {
 
     @GetMapping("/login/gov/callback")
     public String handleGovCallback(@RequestParam String afm, @RequestParam String phone) {
-        // Ταυτοποίηση στοιχείων στη δική μας βάση
-        User user = userRepository.findByAfmAndPhone(afm, phone).orElse(null);
+        // Κανονικοποίηση τηλεφώνου: Προσθήκη +30 αν λείπει, για να ταιριάζει με τη βάση
+        String normalizedPhone = phone;
+        if (normalizedPhone != null && !normalizedPhone.startsWith("+30")) {
+            normalizedPhone = "+30" + normalizedPhone;
+        }
+
+        // Ταυτοποίηση στοιχείων με το κανονικοποιημένο τηλέφωνο
+        User user = userRepository.findByAfmAndPhone(afm, normalizedPhone).orElse(null);
 
         if (user != null) {
-            // Αυτόματη σύνδεση (Manual Authentication)
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            // Αποστολή SMS ειδοποίησης μέσω NOC
             String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"));
-            nocClientService.sendSms(phone, "Επιτυχής σύνδεση στο Gov.gr την " + time);
+
+            // Χρήση του user.getPhone() που είναι ήδη σε σωστή μορφή E164
+            nocClientService.sendSms(user.getPhone(), "Επιτυχής σύνδεση στο Gov.gr την " + time);
 
             return "redirect:/profile";
         } else {
