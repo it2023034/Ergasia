@@ -30,7 +30,7 @@ MyCityGov - Πύλη Αιτημάτων & Ψηφιακών Ραντεβού με
     - password: test1234
     - afm: 123456789
     - phone: 6989704499
-- Υπαλλήλους (Employee)
+- Υπάλληλοι (Employee)
   - **Demo Employee**
     - username: empl_nikolaou
     - password: emp123
