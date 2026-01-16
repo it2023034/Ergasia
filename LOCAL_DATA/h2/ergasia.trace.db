@@ -6082,3 +6082,39 @@ create global temporary table HTE_appointment(confirmed boolean, rn_ integer not
 2026-01-16 13:22:29.354778+02:00 jdbc[44]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_request" already exists; SQL statement:
 create global temporary table HTE_request(rn_ integer not null, date timestamp(6), id bigint, request_type_id bigint, service_id bigint, employee_id varchar(10), user_id varchar(10), title varchar(50), description varchar(1000), file_name varchar(255), status enum ('COMPLETED','IN_PROGRESS','RECEIVED','REJECTED','SUBMITTED','WAITING_USER_DATA'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.084920+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ht_employee" already exists; SQL statement:
+create global temporary table HT_employee(id varchar(10) not null, primary key (id)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.087490+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_employee" already exists; SQL statement:
+create global temporary table HTE_employee(id varchar(10) not null, afm varchar(255), birth_place varchar(255), dob varchar(255), email varchar(255), father_name varchar(255), father_surname varchar(255), first_name varchar(255), id_card_number varchar(255), last_name varchar(255), mother_name varchar(255), mother_surname varchar(255), password varchar(255), phone varchar(255), residence_place varchar(255), street varchar(255), street_number varchar(255), username varchar(255), role enum ('ADMIN','CITIZEN','EMPLOYEE'), primary key (id)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.088106+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_service" already exists; SQL statement:
+create global temporary table HTE_service(active boolean, rn_ integer not null, id bigint, service_name varchar(30), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.088586+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_request_type" already exists; SQL statement:
+create global temporary table HTE_request_type(active boolean, rn_ integer not null, department_service_id bigint, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.089028+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_appointment" already exists; SQL statement:
+create global temporary table HTE_appointment(confirmed boolean, rn_ integer not null, appointment_date timestamp(6), id bigint, request_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:20:40.089829+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_request" already exists; SQL statement:
+create global temporary table HTE_request(rn_ integer not null, date timestamp(6), id bigint, request_type_id bigint, service_id bigint, employee_id varchar(10), user_id varchar(10), title varchar(50), description varchar(1000), file_name varchar(255), status enum ('COMPLETED','IN_PROGRESS','RECEIVED','REJECTED','SUBMITTED','WAITING_USER_DATA'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.828434+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ht_employee" already exists; SQL statement:
+create global temporary table HT_employee(id varchar(10) not null, primary key (id)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.829172+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_employee" already exists; SQL statement:
+create global temporary table HTE_employee(id varchar(10) not null, afm varchar(255), birth_place varchar(255), dob varchar(255), email varchar(255), father_name varchar(255), father_surname varchar(255), first_name varchar(255), id_card_number varchar(255), last_name varchar(255), mother_name varchar(255), mother_surname varchar(255), password varchar(255), phone varchar(255), residence_place varchar(255), street varchar(255), street_number varchar(255), username varchar(255), role enum ('ADMIN','CITIZEN','EMPLOYEE'), primary key (id)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.829569+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_service" already exists; SQL statement:
+create global temporary table HTE_service(active boolean, rn_ integer not null, id bigint, service_name varchar(30), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.829921+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_request_type" already exists; SQL statement:
+create global temporary table HTE_request_type(active boolean, rn_ integer not null, department_service_id bigint, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.830194+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_appointment" already exists; SQL statement:
+create global temporary table HTE_appointment(confirmed boolean, rn_ integer not null, appointment_date timestamp(6), id bigint, request_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-16 21:22:12.830720+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_request" already exists; SQL statement:
+create global temporary table HTE_request(rn_ integer not null, date timestamp(6), id bigint, request_type_id bigint, service_id bigint, employee_id varchar(10), user_id varchar(10), title varchar(50), description varchar(1000), file_name varchar(255), status enum ('COMPLETED','IN_PROGRESS','RECEIVED','REJECTED','SUBMITTED','WAITING_USER_DATA'), primary key (rn_)) TRANSACTIONAL [42101-232]
