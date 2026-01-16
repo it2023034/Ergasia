@@ -88,7 +88,7 @@ public class EmpServInitializer {
                                 DepartmentService departmentService,
                                 String afm, String phone) {
 
-        if (repo.existsByUsername(username)) return;
+//        if (repo.existsByUsername(username)) return;
 
         Employee emp = new Employee();
         emp.setId(id);

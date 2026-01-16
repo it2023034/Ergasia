@@ -37,7 +37,6 @@ public class EmployeeController {
         this.appointmentRepository = appointmentRepository;
     }
 
-    // 1️⃣ Προβολή όλων των requests του employee
     @GetMapping("/requests")
     public String listRequests(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Employee employee = getEmployeeFromUser(userDetails);
@@ -50,7 +49,6 @@ public class EmployeeController {
         return "requests"; // Thymeleaf template
     }
 
-    // 2️⃣ Self-assign request
     @PostMapping("/requests/{id}/self-assign")
     public String selfAssignRequest(@PathVariable Long id,
                                     @AuthenticationPrincipal UserDetails userDetails) {
@@ -62,7 +60,6 @@ public class EmployeeController {
         return "redirect:/employee/requests";
     }
 
-    // 3️⃣ Add comment
     @PostMapping("/requests/{id}/comment")
     public String addComment(@PathVariable Long id,
                              @RequestParam String comment) {
@@ -73,7 +70,6 @@ public class EmployeeController {
         return "redirect:/employee/requests";
     }
 
-    // 4️⃣ Change status
     @PostMapping("/requests/{id}/status")
     public String changeStatus(@PathVariable Long id,
                                @RequestParam ApplicationStatus status) {
@@ -84,7 +80,6 @@ public class EmployeeController {
         return "redirect:/employee/requests";
     }
 
-    // 5️⃣ Confirm / reschedule / cancel appointments
     @PostMapping("/empappointments/{id}/confirm")
     public String confirmAppointment(@PathVariable Long id) {
         Appointment appointment = getAppointmentById(id);
@@ -114,21 +109,18 @@ public class EmployeeController {
         return "redirect:/employee/empappointments";
     }
 
-    // Προβολή όλων των appointments για τον employee
     @GetMapping("/empappointments")
     public String listAppointments(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         Employee employee = getEmployeeFromUser(userDetails);
         if (employee == null) return "redirect:/login";
 
-        // Ανάκτηση των appointments που ανήκουν στον employee
         List<Appointment> appointments = appointmentRepository.findByEmployee(employee);
 
         model.addAttribute("appointments", appointments);
-        return "empappointments"; // το Thymeleaf template σου
+        return "empappointments";
     }
 
 
-    // --- Helper methods ---
     private Employee getEmployeeFromUser(UserDetails userDetails) {
         if (userDetails == null) return null;
         Optional<Employee> employee = employeeRepository.findByUsername(userDetails.getUsername());

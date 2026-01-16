@@ -24,6 +24,4 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    // πιο ειδικα μετα π.χ.UserNotFoundException
 }
