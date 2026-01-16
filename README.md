@@ -53,8 +53,6 @@ MyCityGov - Πύλη Αιτημάτων & Ψηφιακών Ραντεβού με
 |----------|--------------------------------|
 | Homepage | http://localhost:8080/homepage |
 | Login    | http://localhost:8080/login    |
-| Profile  | http://localhost:8080/profile  |
-| Logout   | http://localhost:8080/logout   |
 | Register | http://localhost:8080/register |
 
 ### Gov Login Page
