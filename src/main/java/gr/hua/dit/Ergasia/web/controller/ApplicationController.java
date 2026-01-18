@@ -23,17 +23,14 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    // Endpoint 1: Λίστα Διαθέσιμων Υπηρεσιών
     @GetMapping("/types")
     public ResponseEntity<Map<String, String>> getServiceTypes() {
         return ResponseEntity.ok(applicationService.getAvailableServices());
     }
 
-    // Endpoint 2: Υποβολή Αίτησης (Με Αρχείο)
-    // ΣΗΜΕΙΩΣΗ: Στο Postman/React πρέπει να στείλεις 'Content-Type: multipart/form-data'
     @PostMapping(consumes = {"multipart/form-data"})
     public ResponseEntity<?> submitApplication(
-            @Valid @ModelAttribute ApplicationRequest request, // <--- Εδώ
+            @Valid @ModelAttribute ApplicationRequest request,
             @RequestParam(value = "file", required = false) MultipartFile file
     ) {
         try {
@@ -45,7 +42,6 @@ public class ApplicationController {
     }
 
 
-    // Endpoint 3: Παρακολούθηση (Οι αιτήσεις μου)
     @GetMapping("/my")
     public ResponseEntity<List<Application>> getMyApplications() {
         return ResponseEntity.ok(applicationService.getMyApplications());

@@ -32,7 +32,6 @@ public class ApplicationUIController {
         model.addAttribute("applicationRequest", new ApplicationRequest());
         model.addAttribute("types", applicationService.getAvailableServices());
 
-        // Παίρνουμε όλες τις ενεργές υπηρεσίες για dropdown
         List<DepartmentService> services = departmentServiceRepository.findAll();
         model.addAttribute("services", services);
 
@@ -55,7 +54,7 @@ public class ApplicationUIController {
     @GetMapping("/list")
     public String listApplications(Model model) {
         model.addAttribute("applications", applicationService.getMyApplications());
-        return "list"; // templates/applications/list.html
+        return "list";
     }
 
     @GetMapping("/{id}")
@@ -66,6 +65,6 @@ public class ApplicationUIController {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Application not found"));
         model.addAttribute("app", app);
-        return "detail"; // templates/applications/detail.html
+        return "detail";
     }
 }

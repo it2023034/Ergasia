@@ -20,9 +20,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * JWT authentication filter for Ergasia project.
- */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -44,9 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         final String path = request.getServletPath();
-        // Αυτός είναι ο μόνος public endpoint για να πάρουμε token
         if (path.equals("/api/v1/auth/client-tokens")) return true;
-        // Όλα τα υπόλοιπα api/v1 endpoints απαιτούν JWT
         return !path.startsWith("/api/v1");
     }
 
@@ -57,7 +52,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     final FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
 
-        // Δεν υπάρχει header ή δεν είναι Bearer -> αφήνουμε το request να συνεχίσει
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -69,25 +63,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             final String subject = claims.getSubject();
             final Collection<String> roles = (Collection<String>) claims.get("roles");
 
-            // Μετατρέπουμε τα roles σε GrantedAuthority
             final var authorities =
                     roles == null
                             ? List.<GrantedAuthority>of()
                             : roles.stream().map(role ->
                             new SimpleGrantedAuthority("ROLE_" + role)).toList();
 
-            // Δημιουργούμε Spring Security User
             final User principal = new User(subject, "", authorities);
             final UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(principal, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         } catch (Exception ex) {
-            // Άκυρο Token ή κάποιο σφάλμα
             LOGGER.warn("JwtAuthenticationFilter failed", ex);
             this.writeError(response);
-            return; // σταματάμε εδώ, δεν συνεχίζουν άλλα φίλτρα
+            return;
         }
 
-        filterChain.doFilter(request, response); // συνεχίζουμε στο επόμενο φίλτρο
+        filterChain.doFilter(request, response);
     }
 }

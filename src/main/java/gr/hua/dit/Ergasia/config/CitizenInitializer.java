@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class CitizenInitializer {
 
     @Bean
-    @Order(2) // τρέχει μετά τον UserInitializer
+    @Order(2)
     CommandLineRunner initCitizens(UserRepository repo, PasswordEncoder encoder) {
         return args -> {
             createCitizen(repo, encoder, "jkaralis", "2500000001", "ioannis.karalis@gmail.com", "test1234", "123456789", "6989704499");
@@ -30,7 +30,7 @@ public class CitizenInitializer {
     private void createCitizen(UserRepository repo, PasswordEncoder encoder,
                                String username, String id, String email, String password,
                                String afm, String phone) {
-//        if (repo.existsByUsername(username)) return;
+        if (repo.existsByUsername(username)) return;
 
         User u = new User();
         u.setId(id);

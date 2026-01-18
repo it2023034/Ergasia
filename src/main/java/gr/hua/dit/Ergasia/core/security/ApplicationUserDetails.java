@@ -11,7 +11,7 @@ import java.util.Collections;
 public class ApplicationUserDetails implements UserDetails {
 
     private final String userId;
-    private final String username; // Θα κρατάμε το username ή το email εδώ
+    private final String username;
     private final String passwordHash;
     private final Role role;
 
@@ -32,7 +32,6 @@ public class ApplicationUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Μετατρέπει το Enum Role (π.χ. ADMIN) σε ROLE_ADMIN
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
     }
 

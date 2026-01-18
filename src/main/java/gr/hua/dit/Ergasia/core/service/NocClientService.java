@@ -13,7 +13,6 @@ public class NocClientService {
     private final RestClient restClient;
 
     public NocClientService(@Value("${noc.api.url}") String baseUrl) {
-        // Εδώ το baseUrl είναι "http://localhost:8081/api/v1" από το application.yml
         this.restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 

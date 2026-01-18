@@ -46,7 +46,7 @@ public class EmployeeController {
 
         List<Request> requests = employeeServices.showListOfRequests(employee);
         model.addAttribute("requests", requests);
-        return "requests"; // Thymeleaf template
+        return "requests";
     }
 
     @PostMapping("/requests/{id}/self-assign")

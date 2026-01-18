@@ -25,7 +25,6 @@ public class ApplicationRequest {
     public void setServiceId(Long serviceId) { this.serviceId = serviceId; }
 
 
-    // Getters & Setters
     public ApplicationType getType() { return type; }
     public void setType(ApplicationType type) { this.type = type; }
 

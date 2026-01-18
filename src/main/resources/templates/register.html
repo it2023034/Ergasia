@@ -19,7 +19,6 @@
 
                     <h3 class="text-center mb-4">Register</h3>
 
-                    <!-- Generic error message from controller -->
                     <div th:if="${errorMessage}" class="alert alert-danger">
                         <span th:text="${errorMessage}"></span>
                     </div>
@@ -28,12 +27,10 @@
                           th:object="${registerRequest}"
                           method="post">
 
-                        <!-- Validation errors (MUST be inside form) -->
                         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                             Please correct the highlighted errors.
                         </div>
 
-                        <!-- Username -->
                         <div class="mb-3">
                             <label class="form-label">Username</label>
                             <input type="text"
@@ -44,7 +41,6 @@
                                  th:errors="*{username}"></div>
                         </div>
 
-                        <!-- Email -->
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email"
@@ -55,7 +51,6 @@
                                  th:errors="*{email}"></div>
                         </div>
 
-                        <!-- Password -->
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input type="password"
@@ -66,7 +61,6 @@
                                  th:errors="*{password}"></div>
                         </div>
 
-                        <!-- AFM -->
                         <div class="mb-3">
                             <label class="form-label">AFM</label>
                             <input type="text"
@@ -77,7 +71,6 @@
                                  th:errors="*{afm}"></div>
                         </div>
 
-                        <!-- ID Card Number -->
                         <div class="mb-3">
                             <label class="form-label">ID Card Number</label>
                             <input type="text"
@@ -89,7 +82,6 @@
                                  th:errors="*{idCardNumber}"></div>
                         </div>
 
-                        <!-- Phone -->
                         <div class="mb-3">
                             <label class="form-label">Phone</label>
                             <input type="text"

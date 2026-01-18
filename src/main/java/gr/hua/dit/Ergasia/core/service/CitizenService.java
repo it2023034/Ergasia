@@ -41,35 +41,30 @@ public class CitizenService {
     public Request submitRequest(String title, String description, RequestType type,
                                  MultipartFile file, String username) {
 
-        // Βρίσκουμε τον χρήστη που υποβάλλει την αίτηση
         User citizen = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
 
         Request request = new Request();
         request.setTitle(title);
-        request.setDescription(description);      // Σωστή αποθήκευση περιγραφής
-        request.setRequestType(type);            // Σωστή αποθήκευση τύπου αιτήματος
+        request.setDescription(description);
+        request.setRequestType(type);
         request.setStatus(ApplicationStatus.RECEIVED);
-        request.setDate(LocalDateTime.now());    // Ημερομηνία υποβολής
-        request.setCitizen(citizen);             // Συσχέτιση με χρήστη
+        request.setDate(LocalDateTime.now());
+        request.setCitizen(citizen);
 
-        // Αν υπάρχει αρχείο, το αποθηκεύουμε και συνδέουμε το request με το filename
         if (file != null && !file.isEmpty()) {
             String fileName = fileStorageService.save(file);
             request.setFileName(fileName);
         }
 
-        // Αποθήκευση στη βάση
         return requestRepository.save(request);
     }
 
     public List<Request> getMyRequests(String username) {
 
-        // Βρίσκουμε τον χρήστη
         User citizen = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
 
-        // Επιστρέφουμε μόνο τα requests που ανήκουν στον συγκεκριμένο χρήστη
         return requestRepository.findByCitizen(citizen);
     }
 

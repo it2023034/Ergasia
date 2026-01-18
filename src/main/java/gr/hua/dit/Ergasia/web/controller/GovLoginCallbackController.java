@@ -37,18 +37,15 @@ public class GovLoginCallbackController {
                                     @RequestParam String phone,
                                     HttpServletRequest request) {
 
-        // normalize phone
         String normalizedPhone = phone;
         if (normalizedPhone != null && !normalizedPhone.startsWith("+30")) {
             normalizedPhone = "+30" + normalizedPhone;
         }
 
-        // find user
         User user = userRepository.findByAfmAndPhone(afm, normalizedPhone).orElse(null);
 
         if (user != null) {
 
-            // --- LOGIN USER ---
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
 
             UsernamePasswordAuthenticationToken auth =
@@ -58,13 +55,11 @@ public class GovLoginCallbackController {
             context.setAuthentication(auth);
             SecurityContextHolder.setContext(context);
 
-            // store auth in session so /profile works
             request.getSession(true).setAttribute(
                     HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
                     context
             );
 
-            // --- SEND SMS ---
             String time = LocalDateTime.now()
                     .format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"));
 
@@ -73,11 +68,9 @@ public class GovLoginCallbackController {
                     "Επιτυχής σύνδεση στο Gov.gr την " + time
             );
 
-            // --- REDIRECT TO PROFILE ---
             return "redirect:/profile";
 
         } else {
-            // user not found
             return "redirect:/login?error=Invalid Gov.gr credentials. User not found.";
         }
     }

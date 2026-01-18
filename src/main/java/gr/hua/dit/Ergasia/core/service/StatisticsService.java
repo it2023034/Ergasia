@@ -27,40 +27,28 @@ public class StatisticsService {
         this.appointmentSlotRepository = appointmentSlotRepository;
     }
 
-    /**
-     * Επιστρέφει στατιστικά στοιχεία για το σύστημα.
-     * Περιλαμβάνει συνολικό πλήθος τύπων αιτήσεων, ενεργών/ανενεργών,
-     * συνολικό πλήθος τμημάτων, slots, και πλήθος αιτήσεων ανά τμήμα.
-     */
     public StatisticsDTO getStatistics() {
 
-        // 1️⃣ Συνολικό πλήθος request types
         long totalRequestTypes = requestTypeRepository.count();
 
-        // 2️⃣ Συνολικό πλήθος ενεργών και ανενεργών request types
         long activeRequestTypes = requestTypeRepository.findAll().stream()
                 .filter(t -> t.isActive())
                 .count();
         long inactiveRequestTypes = totalRequestTypes - activeRequestTypes;
 
-        // 3️⃣ Συνολικό πλήθος τμημάτων και appointment slots
         long totalDepartments = departmentRepository.count();
         long totalAppointmentSlots = appointmentSlotRepository.count();
 
-        // 4️⃣ Βελτιωμένος υπολογισμός request types ανά τμήμα
-        // Προηγούμενη έκδοση έκανε findAll() για κάθε τμήμα → βαρύ
         Map<Long, Long> countPerDept = requestTypeRepository.findAll().stream()
-                .filter(t -> t.getDepartmentService() != null) // αγνοούμε null
+                .filter(t -> t.getDepartmentService() != null)
                 .collect(Collectors.groupingBy(t -> t.getDepartmentService().getId(), Collectors.counting()));
 
-        // 5️⃣ Χτίζουμε τελικό Map με όνομα τμήματος -> πλήθος request types
         Map<String, Long> requestTypesPerDepartment = new HashMap<>();
         for (DepartmentService d : departmentRepository.findAll()) {
             long count = countPerDept.getOrDefault(d.getId(), 0L);
             requestTypesPerDepartment.put(d.getServiceName(), count);
         }
 
-        // 6️⃣ Επιστρέφουμε DTO
         return new StatisticsDTO(
                 totalRequestTypes,
                 activeRequestTypes,

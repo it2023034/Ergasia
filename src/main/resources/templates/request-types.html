@@ -13,13 +13,11 @@
 
   <h3>Request Types</h3>
 
-  <!-- Φόρμα προσθήκης νέου τύπου -->
   <form th:action="@{/request-type}" method="post" class="mb-3">
     <input type="text" name="name" placeholder="New Request Type" required>
     <button type="submit" class="btn btn-primary">Add</button>
   </form>
 
-  <!-- Πίνακας τύπων αιτημάτων -->
   <table class="table table-bordered">
     <thead>
     <tr>
@@ -37,7 +35,6 @@
       <td th:text="${r.departmentService != null ? r.departmentService.serviceName : '-'}"></td>
       <td th:text="${r.active} ? '✅' : '❌'"></td>
       <td>
-        <!-- Εναλλαγή ενεργού/ανενεργού -->
         <form th:action="@{/request-type/{id}/active(id=${r.id})}" method="post" style="display:inline;">
           <input type="hidden" name="active" th:value="${!r.active}">
           <button type="submit" class="btn btn-sm"

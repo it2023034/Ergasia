@@ -32,35 +32,31 @@ public class AdminServicesController {
         this.statisticsService = statisticsService;
     }
 
-    // ------------------ Departments ------------------
     @GetMapping("/departments")
     public String departments(Model model) {
         List<DepartmentService> departments = departmentRepository.findAll();
         model.addAttribute("departments", departments);
-        return "departments"; // departments.html
+        return "departments";
     }
 
-    // ------------------ Request Types ------------------
     @GetMapping("/request-types")
     public String requestTypes(Model model) {
         List<RequestType> requestTypes = requestTypeRepository.findAll();
         model.addAttribute("requestTypes", requestTypes);
-        return "request-types"; // request-types.html
+        return "request-types";
     }
 
-    // ------------------ Appointments ------------------
     @GetMapping("/appointments")
     public String appointments(Model model) {
         List<AppointmentSlot> appointments = appointmentRepository.findAll();
         model.addAttribute("appointments", appointments);
-        return "appointments"; // appointments.html
+        return "appointments";
     }
 
-    // ------------------ Statistics ------------------
     @GetMapping("/statistics")
     public String statistics(Model model) {
         StatisticsDTO stats = statisticsService.getStatistics();
         model.addAttribute("stats", stats);
-        return "statistics"; // statistics.html
+        return "statistics";
     }
 }

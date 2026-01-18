@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/request-type") // το HTML θα πάει εδώ
+@RequestMapping("/request-type")
 public class RequestTypeUIController {
 
     private final RequestTypeService requestTypeService;
@@ -18,13 +18,13 @@ public class RequestTypeUIController {
     @GetMapping
     public String listRequestTypes(Model model) {
         model.addAttribute("requestTypes", requestTypeService.getAll());
-        return "request-types"; // το HTML template σου
+        return "request-types";
     }
 
     @PostMapping
     public String addRequestType(@RequestParam String name) {
         requestTypeService.create(name);
-        return "redirect:/request-type"; // redirect στο ίδιο path
+        return "redirect:/request-type";
     }
 
     @PostMapping("/{id}/active")
@@ -33,7 +33,7 @@ public class RequestTypeUIController {
             @RequestParam boolean active
     ) {
         requestTypeService.setActive(id, active);
-        return "redirect:/request-type"; // redirect στο ίδιο path
+        return "redirect:/request-type";
     }
 }
 

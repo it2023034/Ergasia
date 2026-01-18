@@ -36,22 +36,19 @@ public class ApplicationService {
         this.departmentServiceRepository = departmentServiceRepository;
     }
 
-    // Utility method για ασφαλή ανάκτηση του username
     private String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails userDetails) {
             return userDetails.getUsername();
         }
-        return principal.toString(); // Αν είναι απλό String
+        return principal.toString();
     }
 
-    // Λίστα διαθέσιμων τύπων αιτήσεων
     public Map<String, String> getAvailableServices() {
         return Arrays.stream(ApplicationType.values())
                 .collect(Collectors.toMap(Enum::name, ApplicationType::getDescription));
     }
 
-    // Υποβολή αίτησης
     public Application submitApplication(ApplicationRequest request, MultipartFile file) throws IOException {
         String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)
@@ -65,7 +62,6 @@ public class ApplicationService {
         app.setCitizen(currentUser);
         app.setAppointmentDate(request.getAppointmentDate());
 
-        // Προσθήκη υπηρεσίας
         DepartmentService service = departmentServiceRepository.findById(request.getServiceId())
                 .orElseThrow(() -> new RuntimeException("Service not found"));
         app.setService(service);
@@ -78,7 +74,6 @@ public class ApplicationService {
         return applicationRepository.save(app);
     }
 
-    // Λίστα αιτήσεων του τρέχοντος χρήστη
     public List<Application> getMyApplications() {
         String username = getCurrentUsername();
         User currentUser = userRepository.findByUsernameOrEmail(username, username)

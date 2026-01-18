@@ -11,7 +11,6 @@ public class StatisticsDTO {
     private long totalDepartments;
     private long totalAppointmentSlots;
 
-    // requestTypesPerDepartment: {"ΚΕΠ": 4, "Τεχνική Υπηρεσία": 2}
     private Map<String, Long> requestTypesPerDepartment;
 
     public StatisticsDTO(long totalRequestTypes,

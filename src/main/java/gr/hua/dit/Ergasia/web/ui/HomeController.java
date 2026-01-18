@@ -8,7 +8,6 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home() {
-        // Επιστρέφει το template home.html
         return "home";
     }
 }

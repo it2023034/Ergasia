@@ -40,7 +40,6 @@ public class RegisterRequest {
     private String street;
     private String streetNumber;
 
-    // Getters and Setters
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }

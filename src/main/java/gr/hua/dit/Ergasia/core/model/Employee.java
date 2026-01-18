@@ -2,9 +2,6 @@ package gr.hua.dit.Ergasia.core.model;
 
 import jakarta.persistence.*;
 
-/**
- * Employee entity.
- */
 @Entity
 @Table(name = "employee", uniqueConstraints = {}, indexes = {})
 public class Employee extends User{

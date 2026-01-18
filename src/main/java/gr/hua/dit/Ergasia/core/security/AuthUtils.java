@@ -3,9 +3,6 @@ package gr.hua.dit.Ergasia.core.security;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
-/**
- * Authentication utilities for controllers.
- */
 public final class AuthUtils {
 
     private AuthUtils() {

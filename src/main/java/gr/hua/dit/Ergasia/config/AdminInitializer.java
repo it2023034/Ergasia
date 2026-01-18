@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AdminInitializer {
 
     @Bean
-    @Order(1) // Τρέχει πριν τους citizens
+    @Order(1)
     CommandLineRunner initAdmins(UserRepository repo, PasswordEncoder encoder) {
         return args -> {
             createAdmin(repo, encoder, "athanasios.krios", "7500000001", "athanasios.krios@gov.gr", "Admin@2026", "123406789", "2101234567");

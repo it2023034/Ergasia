@@ -80,8 +80,8 @@ public class RequestInitializer {
         if (exists) return;
 
         Request r = new Request(title, service, comments);
-        r.setEmployee(employee);  // Υπεύθυνος
-        r.setCitizen(citizen);   // Χρήστης που υποβάλλει το αίτημα
+        r.setEmployee(employee);
+        r.setCitizen(citizen);
         repo.save(r);
     }
 }

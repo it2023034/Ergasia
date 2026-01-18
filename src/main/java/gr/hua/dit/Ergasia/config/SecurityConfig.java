@@ -21,9 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    /**
-     * JWT API chain (stateless) για REST endpoints.
-     */
     @Bean
     @Order(1)
     public SecurityFilterChain apiChain(
@@ -51,10 +48,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
-    /**
-     * UI chain (stateful) για web login με cookies.
-     */
     @Bean
     @Order(2)
     public SecurityFilterChain uiChain(HttpSecurity http) throws Exception {

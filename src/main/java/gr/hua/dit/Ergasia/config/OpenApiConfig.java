@@ -9,9 +9,6 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * OpenAPI (Swagger) configuration for Ergasia REST API.
- */
 @Configuration
 public class OpenApiConfig {
 

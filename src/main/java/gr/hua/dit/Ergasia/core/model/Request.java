@@ -99,14 +99,12 @@ public class Request {
         return id.toString();
     }
 
-    // --- Νέοι setters που ήταν άδειοι ---
     public void setRequestType(RequestType type) { this.requestType = type; }
     public void setDescription(String description) { this.description = description; }
     public void setDate(LocalDateTime date) { this.date = date; }
     public void setCitizen(User citizen) { this.citizen = citizen; }
     public void setFileName(String fileName) { this.fileName = fileName; }
 
-    // Και οι αντίστοιχοι getters
     public User getCitizen() { return citizen; }
     public RequestType getRequestType() { return requestType; }
     public String getDescription() { return description; }
