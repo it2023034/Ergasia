@@ -65,7 +65,7 @@ public class GovLoginCallbackController {
 
             nocClientService.sendSms(
                     user.getPhone(),
-                    "Επιτυχής σύνδεση στο Gov.gr την " + time
+                    "Successful login to Gov.gr at " + time
             );
 
             return "redirect:/profile";

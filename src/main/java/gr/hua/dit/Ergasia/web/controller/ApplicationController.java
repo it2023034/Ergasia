@@ -35,9 +35,9 @@ public class ApplicationController {
     ) {
         try {
             Application savedApp = applicationService.submitApplication(request, file);
-            return ResponseEntity.ok("Η αίτηση με ID " + savedApp.getId() + " υποβλήθηκε επιτυχώς.");
+            return ResponseEntity.ok("The application with ID " + savedApp.getId() + " was submitted successfully.");
         } catch (IOException e) {
-            return ResponseEntity.status(500).body("Σφάλμα κατά το ανέβασμα του αρχείου.");
+            return ResponseEntity.status(500).body("Error while uploading the file.");
         }
     }
 

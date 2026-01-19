@@ -4,19 +4,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base}">
 <head>
-  <title>Nea Aitisi</title>
+  <title>New Application</title>
 </head>
 <body>
 <div layout:fragment="main" class="container mt-5">
 
-  <h2>Ypoboli Neas Aitis</h2>
+  <h2>Submit New Application</h2>
 
   <form th:action="@{/applications/new}" th:object="${applicationRequest}" method="post" enctype="multipart/form-data">
 
     <div class="mb-3">
-      <label class="form-label">Typos Aitis</label>
+      <label class="form-label">Application Type</label>
       <select class="form-select" th:field="*{type}" required>
-        <option value="" disabled selected>Epilexte...</option>
+        <option value="" disabled selected>Select...</option>
         <option th:each="entry : ${types.entrySet()}"
                 th:value="${entry.key}"
                 th:text="${entry.value}">
@@ -25,19 +25,19 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Perigrafi / Scholia</label>
+      <label class="form-label">Description / Comments</label>
       <textarea class="form-control" th:field="*{description}" rows="3" required></textarea>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Epipsinapsi Dikaiologitikou</label>
+      <label class="form-label">Attach Supporting Document</label>
       <input class="form-control" type="file" name="file">
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Epilege Ypiresia</label>
+      <label class="form-label">Select Service</label>
       <select class="form-select" th:field="*{serviceId}" required>
-        <option value="" disabled selected>Epilexte...</option>
+        <option value="" disabled selected>Select...</option>
         <option th:each="service : ${services}"
                 th:value="${service.id}"
                 th:text="${service.serviceName}">
@@ -46,12 +46,12 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Epilege Hmerominia / Ora Rantevou</label>
+      <label class="form-label">Select Appointment Date / Time</label>
       <input class="form-control" type="datetime-local" th:field="*{appointmentDate}" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Ypoboli</button>
-    <a th:href="@{/applications/list}" class="btn btn-secondary">Akyrwsi</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a th:href="@{/applications/list}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 </body>

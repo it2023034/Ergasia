@@ -26,7 +26,7 @@ public class AuthController {
         try {
             User newUser = userService.registerCitizen(request);
             Map<String, String> response = new HashMap<>();
-            response.put("message", "Επιτυχής εγγραφή");
+            response.put("message", "Registration successful");
             response.put("id", newUser.getId());
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {

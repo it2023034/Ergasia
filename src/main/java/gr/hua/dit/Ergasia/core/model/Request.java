@@ -30,7 +30,6 @@ public class Request {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> comment;
 
-    // Νέα πεδία για CitizenService
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User citizen;

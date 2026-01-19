@@ -26,19 +26,16 @@ public class RequestInitializer {
                                    UserRepository userRepo) {
         return args -> {
 
-            // Employees (υπεύθυνοι)
             Employee nikolaou = employeeRepo.findByUsername("empl_nikolaou").orElseThrow();
             Employee papageorgiou = employeeRepo.findByUsername("empl_papageorgiou").orElseThrow();
             Employee karapiperis = employeeRepo.findByUsername("empl_karapiperis").orElseThrow();
 
-            // Department Services
             DepartmentService kepDimosion = serviceRepo.findByServiceName("KEP Tmima Dimosion").orElseThrow();
             DepartmentService kepPolitismou = serviceRepo.findByServiceName("KEP Tmima Politismou").orElseThrow();
             DepartmentService kepEkpaidefsis = serviceRepo.findByServiceName("KEP Tmima Ekpaidefsis").orElseThrow();
             DepartmentService kepYgeias = serviceRepo.findByServiceName("KEP Tmima Ygeias").orElseThrow();
             DepartmentService kepOikonomikon = serviceRepo.findByServiceName("KEP Tmima Oikonomikon").orElseThrow();
 
-            // Citizens (χρήστες που κάνουν τα αιτήματα)
             User jkaralis = userRepo.findByUsername("jkaralis").orElseThrow();
             User mariaL = userRepo.findByUsername("maria.l").orElseThrow();
             User dpap = userRepo.findByUsername("d_pap").orElseThrow();
@@ -48,7 +45,6 @@ public class RequestInitializer {
             User mixalisK = userRepo.findByUsername("mixalis_k").orElseThrow();
             User sofial = userRepo.findByUsername("sofial").orElseThrow();
 
-            // Requests
             create(requestRepo, jkaralis, "Aithma gia dimosio eggrafo", nikolaou, kepDimosion,
                     List.of("Paraklisi gia eggrafa", "Xreiazetai epemvasi"));
 

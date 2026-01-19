@@ -36,11 +36,11 @@ public class UserService {
             response.put("id", user.getId());
             response.put("role", user.getRole());
             response.put("username", user.getUsername());
-            response.put("message", "Επιτυχής σύνδεση");
+            response.put("message", "Login successful");
 
             return response;
         } else {
-            throw new RuntimeException("Λάθος στοιχεία εισόδου");
+            throw new RuntimeException("Invalid credentials");
         }
     }
 

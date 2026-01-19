@@ -18,7 +18,7 @@ public class NocClientService {
 
     public void sendSms(String phoneNumber, String message) {
         restClient.post()
-                .uri("/sms") // Αλλαγή από "/api/v1/sms" σε "/sms"
+                .uri("/sms")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new SendSmsRequest(phoneNumber, message))
                 .retrieve()

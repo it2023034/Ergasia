@@ -46,7 +46,7 @@ public class ApplicationUIController {
             Application saved = applicationService.submitApplication(applicationRequest, file);
             return "redirect:/applications/" + saved.getId();
         } catch (IOException e) {
-            model.addAttribute("error", "Σφάλμα στο ανέβασμα αρχείου.");
+            model.addAttribute("error", "Error uploading the file.");
             return "new";
         }
     }

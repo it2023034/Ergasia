@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="el"
+<html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{base}">
 <head>
-    <title>Oi Aitiseis Mou</title>
+    <title>My Applications</title>
 </head>
 <body>
 <div layout:fragment="main" class="container mt-5">
 
-    <h2>Oi Aitiseis Mou</h2>
+    <h2>My Applications</h2>
 
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Typos</th>
+            <th>Type</th>
             <th>Status</th>
             <th>Created At</th>
-            <th>Drastiriotites</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -28,14 +28,15 @@
             <td th:text="${app.status}"></td>
             <td th:text="${app.createdAt}"></td>
             <td>
-                <a th:href="@{'/applications/' + ${app.id}}" class="btn btn-primary btn-sm">Provoli</a>
+                <a th:href="@{'/applications/' + ${app.id}}"
+                   class="btn btn-primary btn-sm">View</a>
             </td>
         </tr>
         </tbody>
     </table>
 
     <a th:href="@{/homepage}" class="btn btn-secondary">
-        Back to home
+        Back to Home
     </a>
 
 </div>
