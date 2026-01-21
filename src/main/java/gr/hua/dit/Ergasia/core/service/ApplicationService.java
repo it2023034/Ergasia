@@ -27,13 +27,16 @@ public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final UserRepository userRepository;
     private final DepartmentServiceRepository departmentServiceRepository;
+    private final NocClientService nocClientService;
 
     public ApplicationService(ApplicationRepository applicationRepository,
                               UserRepository userRepository,
-                              DepartmentServiceRepository departmentServiceRepository) {
+                              DepartmentServiceRepository departmentServiceRepository,
+                              NocClientService nocClientService) {
         this.applicationRepository = applicationRepository;
         this.userRepository = userRepository;
         this.departmentServiceRepository = departmentServiceRepository;
+        this.nocClientService = nocClientService;
     }
 
     private String getCurrentUsername() {
@@ -71,7 +74,19 @@ public class ApplicationService {
             app.setAttachedFile(file.getBytes());
         }
 
-        return applicationRepository.save(app);
+        Application savedApp = applicationRepository.save(app);
+
+        if (currentUser.getPhone() != null && !currentUser.getPhone().isEmpty()) {
+            String message = String.format("Your application of type %s was submitted successfully!",
+                    savedApp.getType().getDescription());
+            try {
+                nocClientService.sendSms(currentUser.getPhone(), message);
+            } catch (Exception e) {
+                System.err.println("Failed to send SMS: " + e.getMessage());
+            }
+        }
+
+        return savedApp;
     }
 
     public List<Application> getMyApplications() {
