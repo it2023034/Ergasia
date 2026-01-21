@@ -41,8 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         final String path = request.getServletPath();
-        if (path.equals("/api/v1/auth/client-tokens")) return true;
-        return !path.startsWith("/api/v1");
+        if (path.equals("/api/auth/client-tokens")) return true;
+        return !path.startsWith("/api");
     }
 
     @SuppressWarnings("unchecked")
